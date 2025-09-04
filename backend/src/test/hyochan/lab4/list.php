@@ -64,7 +64,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>방명록 목록</title>
+    <title>게시판 목록</title>
 </head>
 <body>
     <!--
@@ -77,7 +77,7 @@
     입력값: 검색타입(search_type), 검색쿼리(search_query)
 
     <table>
-    번호 작성자 내용
+    번호 작성자 제목 작성일
     </table>
     
     글쓰기 버튼 활성화
@@ -100,7 +100,7 @@
         <tr>
             <th>번호</th>
             <th>작성자</th>
-            <th>내용</th>
+            <th>제목</th>
             <th>작성일</th>
         </tr>
 
@@ -119,7 +119,7 @@
                 echo "<tr>";
                 echo "<td>$row[id]</td>";
                 echo "<td>$row[name]</td>";
-                echo "<td>$row[msg]</td>";
+                echo "<td><a href='view.php?id=$row[id]'>$row[title]</a></td>";
                 echo "<td>$row[created_at]";
                 echo "</tr>";
             }

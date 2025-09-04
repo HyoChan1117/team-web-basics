@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록 작성</title>
+</head>
+<body>
+    <!--
+    방명록 작성
+
+    FORM
+    Action: save.php
+    Method: post
+    입력값: 이름(name), 메시지(msg)
+
+    제출 버튼 활성화
+    -->
+
+    <h1>방명록 작성</h1>
+
+    <form action="save.php" method="post">
+        <fieldset>
+            <legend>방명록 입력</legend>
+            이름: <input type="text" name="name" required><br>
+            제목: <input type="text" name="title" required><br>
+            메시지: <br>
+            <textarea cols="30" rows="5" name="msg"></textarea>
+        </fieldset>
+        <button>제출</button>
+        <input type="reset" value="초기화">
+    </form>
+
+    <hr>
+
+    방명록 입장 - <a href="list.php">들어가기</a>
+</body>
+</html>
