@@ -32,7 +32,7 @@
 
     } catch (Exception $e) {
         // DB 연결 실패
-        echo "DB 연결 실패 <br>".$e;
+        echo "DB 오류 발생 <br>".$e;
         exit;
     }
 
@@ -96,9 +96,13 @@
         } else {   // 댓글이 있을 경우
             // 댓글 출력
             while ($commentRow = $commentResult->fetch_assoc()) {
-                echo "<strong>ID: </strong> $commentRow[account] ($commentRow[created_at]) ";
-                echo "<a href='review_delete.php?id=$commentRow[postID]'><button>삭제</button></a> <br>";
+                echo "<strong>ID: </strong> $commentRow[account] ($commentRow[created_at]) <br>";
                 echo "└ $commentRow[content] <br>";
+                echo "<form action='review_delete.php?id=$commentRow[postID]' method='post'>";
+                echo "<input type='hidden' name='postID' value='$id'>";
+                echo "<button>삭제</button>";
+                echo "</form>";
+                
                 echo "<hr>";
             }
         }

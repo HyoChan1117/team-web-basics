@@ -2,10 +2,12 @@
 
     // id 유효성 검사
     $id = isset($_GET['id']) ? $_GET['id'] : '';
+    $postID = isset($_POST['postID']) ? $_POST['postID'] : '';
 
     // 유효하지 않는 id 값일 경우
     // 유효하지 않는 id 값입니다.
-    if (empty($id)) {
+    if (empty($id) || empty($postID)) {
+        echo $postID;
         echo "유효하지 않는 id 값입니다.";
         exit;
     }
@@ -23,7 +25,7 @@
         // 삭제 성공했을 경우
         // 게시물 읽기 페이지 리다이렉션
         if ($result) {
-            header("Location: view.php?id=");
+            header("Location: view.php?id=$postID");
             exit;
         }
        

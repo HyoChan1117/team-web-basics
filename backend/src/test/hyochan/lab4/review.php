@@ -19,7 +19,7 @@
         require_once "./db_connect.php";
 
         // sql문 작성 (INSERT)
-        $sql = "INSERT INTO comment (account, pw, content) VALUES ('$account', '$pw', '$content')";
+        $sql = "INSERT INTO comment (id, account, pw, content) VALUES ('$id', '$account', '$pw', '$content')";
 
         // 쿼리 실행
         $result = $db_conn->query($sql);
