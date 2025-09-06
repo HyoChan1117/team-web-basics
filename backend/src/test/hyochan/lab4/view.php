@@ -25,7 +25,7 @@
 
         // 댓글 출력
         // sql문 작성 (SELECT)
-        $commentSql = "SELECT * FROM comment ORDER BY created_at DESC";
+        $commentSql = "SELECT * FROM comment WHERE id=$id ORDER BY created_at DESC";
 
         // 쿼리 실행
         $commentResult = $db_conn->query($commentSql);
@@ -89,7 +89,7 @@
 
     <?php
 
-        // 댓글이 없을 경우
+        // 댓글이 없거나 게시물 번호가 현재 페이지와 맞지 않을 경우
         // 댓글이 없습니다.
         if ($commentResult->num_rows <= 0) {
             echo "댓글이 없습니다.";
