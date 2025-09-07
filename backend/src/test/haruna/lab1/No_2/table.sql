@@ -1,0 +1,8 @@
+use level_up2;
+
+CREATE TABLE guestbook (
+    id int AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    content VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
