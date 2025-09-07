@@ -19,6 +19,10 @@
         // sql문 작성 (SELECT)
         $sql = "SELECT * FROM board WHERE postID='$postID'";
 
+        $commentSql = "SELECT * FROM comment WHERE postID='$postID'";
+        $commentResult = $db_conn->query($commentSql);
+        $rowComment = $commentResult->fetch_assoc();
+
         // 쿼리 실행
         $result = $db_conn->query($sql);
         $row = $result->fetch_assoc();
@@ -74,6 +78,31 @@
     <hr>
     
     게시판 목록으로 돌아가시겠습니까? <a href="list.php">돌아가기</a>
+    <br><br>
 
+    <!-- 이름 , pw , 내용 받기 
+        action:review.php method:post -->
+        <form action="review.php?id=<?= $postID ?>" method="post">
+            이름: <input type="text" name="name" required>
+            비밀번호: <input type="password" name="pw" required><br>
+            댓글: <br>
+            <textarea name="review" cols="60" rows="5" required></textarea>
+            <br>
+            <button>쓰기</button>
+        </form>
+
+        <?php
+        while ($rowComment = $commentResult->fetch_assoc()) {
+             echo "<fieldset>";
+            echo $rowComment['name'];
+            echo "<br>";
+            echo $rowComment['review'];
+            echo "<br>";
+            echo $rowComment['created_at'];
+            echo "</fieldset>";
+            }
+       
+
+        ?>
 </body>
 </html>
