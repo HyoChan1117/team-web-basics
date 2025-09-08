@@ -9,6 +9,7 @@
         header("Refresh: 2; URL='list.php'");
         echo "잘못된 접근입니다.";
         exit;
+
     }
 
     try {
@@ -18,10 +19,10 @@
         // 게시물 출력
         // sql문 작성 (SELECT)
         $sql = "SELECT * FROM board WHERE postID='$postID'";
-
-        $commentSql = "SELECT * FROM comment WHERE postID='$postID'";
+        
+        // 댓글 출력
+        $commentSql = "SELECT * FROM comment WHERE postID='$postID' ORDER BY created_at DESC";
         $commentResult = $db_conn->query($commentSql);
-        $rowComment = $commentResult->fetch_assoc();
 
         // 쿼리 실행
         $result = $db_conn->query($sql);
@@ -90,19 +91,23 @@
             <br>
             <button>쓰기</button>
         </form>
+        <br>
 
-        <?php
-        while ($rowComment = $commentResult->fetch_assoc()) {
-             echo "<fieldset>";
-            echo $rowComment['name'];
-            echo "<br>";
-            echo $rowComment['review'];
-            echo "<br>";
-            echo $rowComment['created_at'];
-            echo "</fieldset>";
-            }
-       
+        <!-- 댓글 표시 -->
+        <?php $count = $commentResult->num_rows + 1;?>
+        댓글 
+        <?php while ($rowComment = $commentResult->fetch_assoc()):?>
+            <fieldset>
+                <legend>NUM: <?= $count -= 1;?></legend>
+            <?= $rowComment['name'] ?>
+            <br>
+            <?= $rowComment['review'] ?>
+            <br>
+            <?= $rowComment['created_at'] ?>
+            </fieldset>
+            <br>
+        <?php endwhile;?>
 
-        ?>
+        
 </body>
 </html>
