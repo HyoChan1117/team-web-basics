@@ -85,7 +85,7 @@
                     echo "<tr>";
                     echo "<td>". $row['id'] . "</td>";
                     echo "<td>". $row['name'] . "</td>";
-                    echo "<td>". "<a href='view.php?id=$row[id]'>$row[content]</a>" . "</td>";
+                    echo "<td><a href='view.php?id=$row[id]'>$row[content]</a></td>";
                     echo "<td>". $row['created_at'] . "</td>";
                     echo "</tr>";
                 }

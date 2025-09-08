@@ -9,6 +9,7 @@
         header("Refresh: 2; URL='list.php'");
         echo "잘못된 접근입니다.";
         exit;
+
     }
 
     try {
@@ -18,6 +19,10 @@
         // 게시물 출력
         // sql문 작성 (SELECT)
         $sql = "SELECT * FROM board WHERE postID='$postID'";
+        
+        // 댓글 출력
+        $commentSql = "SELECT * FROM comment WHERE postID='$postID' ORDER BY created_at DESC";
+        $commentResult = $db_conn->query($commentSql);
 
         // 쿼리 실행
         $result = $db_conn->query($sql);
@@ -74,6 +79,35 @@
     <hr>
     
     게시판 목록으로 돌아가시겠습니까? <a href="list.php">돌아가기</a>
+    <br><br>
 
+    <!-- 이름 , pw , 내용 받기 
+        action:review.php method:post -->
+        <form action="review.php?id=<?= $postID ?>" method="post">
+            이름: <input type="text" name="name" required>
+            비밀번호: <input type="password" name="pw" required><br>
+            댓글: <br>
+            <textarea name="review" cols="60" rows="5" required></textarea>
+            <br>
+            <button>쓰기</button>
+        </form>
+        <br>
+
+        <!-- 댓글 표시 -->
+        <?php $count = $commentResult->num_rows + 1;?>
+        댓글 
+        <?php while ($rowComment = $commentResult->fetch_assoc()):?>
+            <fieldset>
+                <legend>NUM: <?= $count -= 1;?></legend>
+            <?= $rowComment['name'] ?>
+            <br>
+            <?= $rowComment['review'] ?>
+            <br>
+            <?= $rowComment['created_at'] ?>
+            </fieldset>
+            <br>
+        <?php endwhile;?>
+
+        
 </body>
 </html>

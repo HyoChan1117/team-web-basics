@@ -32,7 +32,7 @@
 
     } catch (Exception $e) {
         // DB 오류 발생
-        echo "DB 오류 발생";
+        echo "DB 오류 발생" . $e;
         exit;
     }
 

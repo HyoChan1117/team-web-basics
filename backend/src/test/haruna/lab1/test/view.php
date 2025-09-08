@@ -13,9 +13,6 @@
         $readQuery = $db_conn->query($readSql);
         $row = $readQuery->fetch_assoc();
 
-        var_dump($row);
-
-
     } catch (Exception $e) {
         echo "DB연결 오류." . $e;
         exit;

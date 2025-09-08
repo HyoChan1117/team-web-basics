@@ -15,8 +15,20 @@ CREATE TABLE IF NOT EXISTS board (
 );
 
 -- 4. 댓글 저장할 테이블(자식) 생성 (외래키: postID)
--- id(PK), name, pw, review, postID(FK)
+-- id(PK), name, pw, review, created_at, postID(FK)
 -- ON DELETE CASCADE(삭제 허용), ON UPDATE CASCADE(수정 허용)
+CREATE TABLE comment (
+    commentID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    pw VARCHAR(100) NOT NULL,
+    review TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    postID INT,
+    CONSTRAINT FK_PostID FOREIGN KEY (postID) -- 制約に名前を付ける -> FK_PostID
+    REFERENCES board (postID) -- REFERENCES（参照） -> どのテーブルのどのカラムを参照するか
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
 
 
 -----------------------------------------------------------------
