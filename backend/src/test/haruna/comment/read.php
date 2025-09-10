@@ -98,7 +98,7 @@
         댓글 
         <?php while ($rowComment = $commentResult->fetch_assoc()):?>
             <fieldset>
-                <legend>NUM: <?= $count -= 1;?></legend>
+                <legend>ID: <?= $count -= 1;?></legend>
             <?= $rowComment['name'] ?>
             <br>
             <?= $rowComment['review'] ?>

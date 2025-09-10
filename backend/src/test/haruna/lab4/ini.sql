@@ -1,0 +1,55 @@
+-- 1. 데이터베이스 생성
+CREATE DATABASE lab4;
+
+-- 2. 데이터베이스 사용
+USE lab4;
+
+-- 3. 게시물 저장할 테이블(부모) 생성
+-- postID(PK), name, title, content, created_at
+CREATE TABLE IF NOT EXISTS board (
+    postID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 4. 댓글 저장할 테이블(자식) 생성 (외래키: postID)
+-- commentID(PK), name, pw, review, created_at , postID(FK)
+-- ON DELETE CASCADE(삭제 허용), ON UPDATE CASCADE(수정 허용)
+CREATE TABLE comment (
+    commentID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    pw VARCHAR(100) NOT NULL,
+    review VARCHAR(200) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    postID INT NOT NULL,
+    CONSTRAINT FK_PostID FOREIGN KEY (postID)
+        REFERENCES board (postID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+
+-----------------------------------------------------------------
+-- 게시글 데이터
+INSERT INTO board (name, title, content) VALUES
+    ('hyochan', 'hi', 'hello'),
+    ('haruna', 'hi', 'hello'),
+    ('dhinesh', 'hi', 'hello'),
+    ('hyochan', 'hi', 'hello'),
+    ('haruna', 'hi', 'hello'),
+    ('dhinesh', 'hi', 'hello'),
+    ('hyochan', 'hi', 'hello'),
+    ('haruna', 'hi', 'hello'),
+    ('dhinesh', 'hi', 'hello'),
+    ('hyochan', 'hi', 'hello'),
+    ('haruna', 'hi', 'hello'),
+    ('dhinesh', 'hi', 'hello'),
+    ('hyochan', 'hi', 'hello'),
+    ('haruna', 'hi', 'hello'),
+    ('dhinesh', 'hi', 'hello'),
+    ('hyochan', 'hi', 'hello'),
+    ('haruna', 'hi', 'hello'),
+    ('dhinesh', 'hi', 'hello')
+;
