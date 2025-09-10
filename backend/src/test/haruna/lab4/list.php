@@ -115,7 +115,7 @@
                     echo "<tr>";
                     echo "<td>$row[postID]</td>";
                     echo "<td>$row[name]</td>";
-                    echo "<td><a href='read.php?id=$row[postID]'>$row[title]</a></td>";
+                    echo "<td><a href='read.php?postID=$row[postID]'>$row[title]</a></td>";
                     echo "<td>$row[created_at]</td>";
                     echo "</tr>";
                 }

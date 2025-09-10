@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS comment (
     review TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     postID INT,
-    PRIMARY KEY (commentID),
+    PRIMARY KEY (commentID)
     CONSTRAINT FK_PostID FOREIGN KEY (postID)
     REFERENCES board (postID)
     ON UPDATE CASCADE
