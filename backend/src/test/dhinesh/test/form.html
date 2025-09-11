@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Book</title>
+</head>
+<body>
+    <h2>Guest Book</h2>
+<!-- create a form for name and messagea area and get the input method in a post and send to save.php -->
+<form action="save.php" method="post">
+
+    <!-- create a name input -->
+    Name: <input type="text" name="name"><br><br>
+
+    <!--create a messageArea using tesxtea tag -->
+    messageArea: <textarea name="messageArea"></textarea><br><br>
+
+<!-- create a button to submit and reset -->
+    <button>submit</button>
+</form> 
+<!-- create a anchor link -->
+ <a href="list.php">list</a>
+</body>
+</html>
