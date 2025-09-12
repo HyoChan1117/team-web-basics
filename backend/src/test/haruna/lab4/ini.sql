@@ -25,7 +25,7 @@ CREATE TABLE comment (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     postID INT NOT NULL,
     CONSTRAINT FK_PostID FOREIGN KEY (postID)
-        REFERENCES board (postID)
+    REFERENCES board (postID)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
