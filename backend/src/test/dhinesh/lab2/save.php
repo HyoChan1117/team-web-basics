@@ -5,8 +5,8 @@
     $messageArea = isset($_POST['messageArea']) ? ($_POST['messageArea']): '';
 
     // validate the input
-    if(empty($name) || empty($messageArea)) {
-        header("refresh: 2; URL='form.php'");
+    if(!empty($name) || empty($messageArea)) {
+        header("refresh: 2; URL='form.html'");
         echo "invalid input please try again";
         exit;
     }
@@ -23,7 +23,7 @@
 
         // display the error message for submit
         if(!$result) {
-            header("refresh: 2; URL='form.php'");
+            header("refresh: 2; URL='form.html'");
             echo "fail to submit";
             exit;
 

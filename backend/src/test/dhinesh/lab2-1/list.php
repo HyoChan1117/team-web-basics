@@ -1,5 +1,10 @@
 <?php
 
+    // pagination
+    $limit = 5; // Number of posts to be displayed on the page
+    $page = isset($_GET['page']) ? $_GET['page'] : 1; // Current Page
+    $offset = ($page -1) * $limit; // Skip this number, start next
+
     // create a search query
     $search_type = isset($_GET['search_type']) ? $_GET['search_type']: 'name';
     $search_query = isset($_GET['search_query']) ? $_GET['search_query']: '';
@@ -21,6 +26,19 @@
 
         // run query
         $result = $db_conn->query($sql);
+
+        // count post number
+        $totalSql = "SELECT COUNT(*) total FROM guestbook";
+        $totalResult = $db_conn->query($totalSql);
+        $totalRow = $totalResult->fetch_assoc();
+        $total = $totalRow['total'];
+        $totalPages = ceil($total / $limit);
+
+        // block setting
+        $pagePerBlock = 5;
+        $currentPage = $page / $pagePerBlock;
+        $startPage = ceil($currentPage -1) * $pagePerBlock + 1; 
+        $endPage = min($currentPage * $pagePerBlock, $totalPages);
 
     }catch(Exception $e){
         // db error message
@@ -59,17 +77,21 @@
         </tr>
     
 <?php
+    $count = $result -> num_rows;
+
     // if the post is valid see the post or display error message
     if($result->num_rows <= 0){
         echo "No post";
     }
     while($row = $result->fetch_assoc()){
         echo "<tr>";
-        echo "<td>$row[id]</td>";
+        echo "<td>$count</td>";
         echo "<td>$row[name]</td>";
         echo "<td>$row[messageArea]</td>";
         echo "<td>$row[created_at]</td>";
         echo "</tr>";
+
+        $count--;
     }
 
 ?>    
