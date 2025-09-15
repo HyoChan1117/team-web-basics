@@ -5,7 +5,7 @@
     $page = isset($_GET['page']) ? $_GET['page']: '1';
     $offset = ($page - 1) * $limit;
 
-    // create a search query
+    // get search query
     $search_type = isset($_GET['search_type']) ? $_GET['search_type']: 'name';
     $search_query = isset($_GET['search_query']) ? $_GET['search_query']: '';
 
@@ -23,7 +23,7 @@
         require_once "./db_config.php";
 
         // sql statement
-        $sql = "SELECT * FROM guestbook $where ORDER BY id DESC";
+        $sql = "SELECT * FROM guestbook $where ORDER BY id DESC LIMIT $limit OFFSET $offset";
 
         // Run query
         $result = $db_conn->query($sql);
@@ -99,7 +99,40 @@
 </table>
 </form>
 <!-- create a anchor -->
- <a href="form.html">write</a>
+ <a href="form.html">write</a><br><br>
+
+<?php
+
+    // pagination
+    $search = "search_type=$search_type&search_query=$search_query";
+
+    // previous page
+    $prevPage = $startPage - 1;
+
+    // next block
+    $nextBlock = $endPage + 1;
+
+    // previous block
+    if($currentBlock != 1) {
+        echo "<a href ='?page=1&$search'><<</a> ";
+        echo "<a href ='?page=$prevPage&$search'><</a> ";
+    }
+
+    // display the current block page
+    for ($i = $startPage; $i <= $endPage; $i++) {
+        if($i == $page) {
+            echo "<a href ='?page=$i&$search'><strong>$i</strong></a> ";
+        }else {
+            echo "<a href='?page=$i&$search'>$i</a> ";
+        }
+    }
+
+    // next block
+    if($endPage != $totalPage) {
+        echo "<a href ='?page=$nextBlock&$search'>></a> ";
+        echo "<a href ='?page=$totalPage&$search'>>></a> ";
+    }
+?>
 
 </body>
 </html>
