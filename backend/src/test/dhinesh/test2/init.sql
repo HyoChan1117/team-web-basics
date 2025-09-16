@@ -11,3 +11,32 @@ CREATE TABLE guestbook (
     messageArea VARCHAR(300) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- data --
+INSERT INTO guestbook (name, messageArea) VALUES
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1"),
+    ("dhinesh", "test1")
