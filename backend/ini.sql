@@ -15,21 +15,21 @@ CREATE TABLE IF NOT EXISTS board (
 );
 
 -- 4. 댓글 저장할 테이블(자식) 생성 (외래키: postID)
--- commentID(PK), name, pw, review, created_at , postID(FK)
+-- id(PK), name, pw, review, postID(FK)
 -- ON DELETE CASCADE(삭제 허용), ON UPDATE CASCADE(수정 허용)
-CREATE TABLE comment (
-    commentID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS comment (
+    commentID INT AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    pw VARCHAR(100) NOT NULL,
-    review VARCHAR(200) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    postID INT NOT NULL,
+    pw VARCHAR(255) NOT NULL,
+    review TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    postID INT,
+    PRIMARY KEY (commentID),
     CONSTRAINT FK_PostID FOREIGN KEY (postID)
     REFERENCES board (postID)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
 );
-
 
 -----------------------------------------------------------------
 -- 게시글 데이터
