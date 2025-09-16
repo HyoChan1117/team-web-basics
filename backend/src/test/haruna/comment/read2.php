@@ -48,7 +48,7 @@ $db_conn->close();
                 <strong>제목:</strong><?= $row['title'] ?><br>
                 <strong>내용:</strong><?= $row['content'] ?><br>
             </fieldset>
-            <a href="delet.php?postID=<?= $postID ?>"><button>삭제</button></a>
+            <a href="delete.php?postID=<?= $postID ?>"><button>삭제</button></a>
             <br><br>
             <a href="list.php">돌아가기</a>
             <br>
