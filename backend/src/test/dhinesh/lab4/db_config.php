@@ -3,9 +3,9 @@
     $hostname = 'db';
     $username = 'root';
     $password = 'root';
-    $database = 'kin';
+    $database = 'lab4';
 
-    // db connect 
+    // db connection
     $db_conn = new mysqli($hostname, $username, $password, $database);
-
+    
 ?>
