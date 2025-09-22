@@ -4,7 +4,7 @@
     $hostname = 'db';
     $username = 'root';
     $password = 'root';
-    $database = 'reservation';
+    $database = 'json';
 
     $db_conn = new mysqli($hostname, $username, $password, $database);
 
