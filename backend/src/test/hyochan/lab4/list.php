@@ -7,7 +7,7 @@
 
     // 검색 유효성 검사
     $search_type = isset($_GET['search_type']) ? $_GET['search_type'] : 'title';
-    $search_query = isset($_GET['search_query']) ? $_GET['search_query'] : '';
+    $search_query = isset($_GET['search_query']) ? htmlspecialchars($_GET['search_query']) : '';
 
     // 검색 조건
     $where = '';
