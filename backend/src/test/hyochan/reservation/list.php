@@ -13,7 +13,7 @@
         $result = $db_conn->query($sql);
 
     } catch (Exception $e) {
-        // DB 오류 발생Hyochan
+        // DB 오류 발생
         echo "DB 오류 발생<br>".$e;
     }
 

@@ -1,9 +1,13 @@
 <?php
 
-    // pagination
-    $limit = 5; // set the page limit
+    // set the page limit
+    $limit = 5;
+
+    // get the page query
     $page = isset($_GET['page']) ? $_GET['page']: '1';
-    $offset = ($page - 1) * $limit;
+
+    // set the offset
+    $offset = ($page -1) * $limit;
 
     // get search query
     $search_type = isset($_GET['search_type']) ? $_GET['search_type']: 'name';
@@ -15,38 +19,37 @@
     if(!empty($search_query)){
         $where = "WHERE $search_type LIKE '$search_query%'";
     }
-
-    // inside a error handling
+    // inside error handling
     try{
-
         // db address
         require_once "./db_config.php";
 
         // sql statement
         $sql = "SELECT * FROM guestbook $where ORDER BY id DESC LIMIT $limit OFFSET $offset";
 
-        // Run query
+        // Run sql query
         $result = $db_conn->query($sql);
 
-        // count post 
-        $totalSql = "SELECT COUNT(*) total FROM guestbook";
+        // set the page
+        $totalSql = "SELECT COUNT(*) total FROM guestbook $where";
         $totalResult = $db_conn->query($totalSql);
-        $totalRow = $totalResult->fetch_assoc();
-        $total = $totalRow ['total'];
+        $totalRow = ($totalResult->fetch_assoc());
+        $total = $totalRow['total'];
         $totalPage = ceil($total / $limit);
 
-        // setting block
+        // setting the block
         $pagePerBlock = 5;
         $currentBlock = ceil($page / $pagePerBlock);
-        $startPage = ($currentBlock - 1) * $pagePerBlock + 1; 
+        $startPage = ($currentBlock - 1) * $pagePerBlock + 1;
         $endPage = min($currentBlock * $pagePerBlock, $totalPage);
+
 
     }catch(Exception $e) {
         // db error
-        echo "DB erro".$e;
+        echo "db error".$e;
     }
     // db close
-    $db_conn-> close();
+    $db_conn->close();
 
 ?>
 
@@ -67,72 +70,64 @@
     </select>
     <input type="search" name= "search_query">
     <button>search</button>
-</form>    
+</form>  
 
-
-<!-- create a table tag-->
+<!-- create a form tag -->
 <form action="list.php" method= "get">
-        <table border= 2>
-            <tr>
-                <th>id</th>
-                <th>Author</th>
-                <th>content</th>
-                <th>created_at</th>
-            </tr>
-       
+    <table border= 2>
+        <tr>
+            <th>id</th>
+            <th>Author</th>
+            <th>content</th>
+            <th>created_at</th>
+        </tr>
 <?php
-    // if the post is valid see the post or display an error message
     if($result->num_rows <= 0){
-        echo "no post";
+        echo "No post";
     }else{
         while($row = $result->fetch_assoc()){
             echo "<tr>";
             echo "<td>$row[id]</td>";
             echo "<td>$row[name]</td>";
-            echo "<td><a href='view.php?id=$row[id]'>$row[messageArea]</a></td>";
+            echo "<td>$row[messageArea]</td>";
             echo "<td>$row[created_at]</td>";
             echo "</tr>";
         }
     }
 
 ?>
-</table>
+    </table>
 </form>
 <!-- create a anchor -->
- <a href="form.html">write</a><br><br>
-
+<a href="form.html">write</a><br><br>
+</form>    
 <?php
-
-    // pagination
+    // search query
     $search = "search_type=$search_type&search_query=$search_query";
 
     // previous page
-    $prevPage = $startPage - 1;
+    $prevBlock = $startPage - 1;
 
-    // next block
+    // next block 
     $nextBlock = $endPage + 1;
 
-    // previous block
-    if($currentBlock != 1) {
-        echo "<a href ='?page=1&$search'><<</a> ";
-        echo "<a href ='?page=$prevPage&$search'><</a> ";
+    if($currentBlock != 1){
+        echo "<a href='?page=1&$search'><<</a> ";
+        echo "<a href='?page=$prevBlock&$search'><</a> ";
     }
 
-    // display the current block page
-    for ($i = $startPage; $i <= $endPage; $i++) {
-        if($i == $page) {
-            echo "<a href ='?page=$i&$search'><strong>$i</strong></a> ";
-        }else {
+    for($i = $startPage; $i <= $endPage; $i++){
+        if($i == $page){
+            echo "<a href='?page=$i&$search'><strong>$i</strong></a> ";
+        }else{    
             echo "<a href='?page=$i&$search'>$i</a> ";
-        }
+        }      
     }
 
-    // next block
     if($endPage != $totalPage) {
-        echo "<a href ='?page=$nextBlock&$search'>></a> ";
-        echo "<a href ='?page=$totalPage&$search'>>></a> ";
-    }
+            echo "<a href='?page=$nextBlock&$search'>></a> ";
+            echo "<a href= '?page=$endPage&$search'>>></a> ";
+        }
 ?>
-
 </body>
 </html>
