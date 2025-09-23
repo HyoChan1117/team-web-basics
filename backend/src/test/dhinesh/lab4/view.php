@@ -1,32 +1,34 @@
 <?php
 
     // get id value through GET method
-    $getId = isset($_GET['postID']) ? $_GET['postID']: '';
+    $postID = isset($_GET['postID']) ? $_GET['postID'] : '';
 
-    // get the id value validation 
-    if(empty($getId)){
-        header("refresh: 2; URL= 'list.php'");
-        echo "No id";
+    // validate id value
+    if (empty($postID)) {
+        header("Refresh: 2; URL='list.php'");
+        echo "Invalid access.";
         exit;
     }
 
-    try{
-        // db address
+    try {
+        // db connect
         require_once "./db_config.php";
 
         // sql statement
-        $sql = "SELECT * FROM board WHERE postID='$getId'";
+        $sql = "SELECT * FROM board WHERE postID='$postID'";
 
         // sql query
         $result = $db_conn->query($sql);
         $row = $result->fetch_assoc();
-    }catch(Exception $e){
+
+    } catch (Exception $e) {
         // db error
         echo "db error".$e;
+        exit;
     }
+
     // db close
     $db_conn->close();
-    
 
 ?>
 <!DOCTYPE html>
@@ -34,18 +36,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guest Book</title>
+    <title>Read Post</title>
 </head>
 <body>
 <?php
-
     if ($result->num_rows > 0) {
-        echo $row['postID'];
-        echo $row['name'];
-        echo $row['messageArea'];
-        echo $row['created_at'];
+        echo "<strong>ID:</strong> " . $row['postID'] . "<br>";
+        echo "<strong>Author:</strong> " . $row['name'] . "<br>";
+        echo "<strong>Title:</strong> " . $row['title'] . "<br>";
+        echo "<strong>Content:</strong> " . $row['messageArea'] . "<br>";
+        echo "<strong>Date:</strong> " . $row['created_at'] . "<br>";
+    } else {
+        echo "Post not found.";
     }
-
 ?>
+<br>
+<a href="list.php">Back to List</a>
 </body>
 </html>
