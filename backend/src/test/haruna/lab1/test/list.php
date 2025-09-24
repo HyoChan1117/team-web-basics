@@ -68,7 +68,7 @@
             <option value="name">이름</option>
             <option value="content">내용</option>
         </select>
-        <input type="search" name="search_query">
+        <input type="search" name="search_query" value="<?= $searchQuery ?>">
         <button>검색</button>
      </search>
      </form>
