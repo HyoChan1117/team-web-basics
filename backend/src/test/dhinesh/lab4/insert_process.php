@@ -18,7 +18,8 @@
         require_once "./db_config.php";
 
         // sql statement (INSERT)
-        $sql = "INSERT INTO board (name, title, messageArea) VALUES ('$name', '$title', '$content')";
+        $sql = "INSERT INTO board (name, title, messageArea) 
+                    VALUES ('$name', '$title', '$content')";
 
         // Run a query
         $result = $db_conn->query($sql);
