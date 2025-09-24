@@ -8,6 +8,7 @@ use lab4;
 CREATE TABLE board(
     postID INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
+    title TEXT NOT NULL,
     messageArea TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guest Book</title>
+    <title>Writing</title>
 </head>
 <body>
-    <h2>Guest Book</h2>
-    <!-- create a name and messageArea and submit button send the save.php file in a post method -->
-<form action="save.php" method="post">
-    <!-- create a name input -->
-    Name: <input type="text" name="Name"><br><br>
-    <!-- create a messageArea -->
-    messageArea: <textarea type="text" name="messageArea"></textarea><br><br>
+    <h2>Bulletin List</h2>
+    
+    <form action="insert_process.php" method="post">
+        <fieldset>
+            Name: <input type="text" name="name"><br>
+            Title: <input type="text" name="title"><br><br>
 
-    <!-- create a button -->
-    <button>submit</button><br><br>
-</form>
+            Content: <textarea type="text" name="content"></textarea><br><br>
 
-<!-- create a anchor for list-->
-<a href="list.php">list</a>
+
+        <button>submit</button>
+        <input type="reset" value="reset"><br><br>
+        </fieldset>
+    </form>
+
+    <a href="list.php">Go back</a>
 </body>
 </html>
