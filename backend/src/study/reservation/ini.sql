@@ -29,8 +29,7 @@ CREATE TABLE IF NOT EXISTS Salon (
 
 CREATE TABLE IF NOT EXISTS Service (
     service_id INT AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    gender VARCHAR(100) NOT NULL,
+    service_name VARCHAR(255) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (service_id)
 );
