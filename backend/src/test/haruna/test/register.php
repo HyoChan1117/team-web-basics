@@ -35,6 +35,7 @@
             <button>가입하기</button>
     </form>
     </fieldset>
+    <a href="login.php">로그인하기</a>
 
     
 </body>

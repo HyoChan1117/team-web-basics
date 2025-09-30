@@ -5,10 +5,10 @@
     $pw = isset($_POST['password']) ? trim($_POST['password']) : '';
     $pw_check = isset($_POST['password_check']) ? trim($_POST['password_check']) : '';
     $name = isset($_POST['name']) ? trim($_POST['name']) : '';
-    $gender = isset($_POST['gender']) ? trim($_POST['gender']) : '';
-    $role = isset($_POST['role']) ? trim($_POST['role']) : '';
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+    $role = isset($_POST['role']) ? $_POST['role'] : '';
     $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
-    $birth = isset($_POST['birth']) ? trim($_POST['birth']) : '';
+    $birth = isset($_POST['birth']) ? $_POST['birth'] : '';
     
     # 유호성 확인
     if ($account == '' || $pw == '' || $pw_check == '' || $name == '' || $gender == '' || 
