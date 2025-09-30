@@ -35,6 +35,12 @@ CREATE TABLE IF NOT EXISTS Service (
     PRIMARY KEY (service_id)
 );
 
+INSERT INTO Service (service_name, price) VALUES
+    ('CUT', 10000),
+    ('PERM', 30000),
+    ('DYEING', 50000)
+;
+
 CREATE TABLE IF NOT EXISTS HairStyle (
     hair_id INT AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
@@ -63,9 +69,11 @@ CREATE TABLE IF NOT EXISTS Reservation (
     reservation_id INT AUTO_INCREMENT,
     client_id INT NOT NULL,
     designer_id INT NOT NULL,
-    service_id INT NOT NULL,
-    start_at DATETIME NOT NULL,
-    end_at DATETIME NOT NULL,
+    service VARCHAR(255) NOT NULL,
+    requirement TEXT,
+    date DATE NOT NULL,
+    start_at TIME NOT NULL,
+    end_at TIME,
     status ENUM ('pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'no_show') NOT NULL DEFAULT 'pending',
     cancelled_at DATETIME,
     cancel_reason TEXT,
@@ -73,8 +81,7 @@ CREATE TABLE IF NOT EXISTS Reservation (
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (reservation_id),
     CONSTRAINT fk_reservation_client FOREIGN KEY (client_id) REFERENCES Users(user_id),
-    CONSTRAINT fk_reservation_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id),
-    CONSTRAINT fk_reservation_service FOREIGN KEY (service_id) REFERENCES Service(service_id)
+    CONSTRAINT fk_reservation_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
 );
 
 CREATE TABLE IF NOT EXISTS StorePolicy (
