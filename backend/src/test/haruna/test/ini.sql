@@ -1,13 +1,14 @@
-CREATE DATABASE IF NOT EXISTS backend;
+CREATE DATABASE backend;
 
 USE backend;
 
 CREATE TABLE IF NOT EXISTS Users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    account VARCHAR(255) NOT NULL,
+    user_id INT AUTO_INCREMENT,
+    account VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     name VARCHAR(100) NOT NULL,
-    role ENUM ('client', 'designer', 'manager') NOT NULL DEFAULT 'client',
+    gender VARCHAR(100) NOT NULL,
+    role ENUM('client', 'designer', 'manager') NOT NULL DEFAULT 'client',
     phone VARCHAR(30),
     birth DATE,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -17,14 +18,18 @@ CREATE TABLE IF NOT EXISTS Users (
 
 CREATE TABLE IF NOT EXISTS Salon (
     salon_id INT AUTO_INCREMENT,
-    image JSON NOT NULL COMMENT 'URL 배열 (캐러셀)',
+    manager_id INT NOT NULL,
+    image JSON NOT NULL COMMENT 'array of image URLs',
     introduction TEXT NOT NULL,
     information JSON NOT NULL COMMENT 'Address, OpeningHour, Holiday, Phone',
     map VARCHAR(255) NOT NULL,
     traffic JSON NOT NULL COMMENT 'Bus, Parking, Directions',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (salon_id)
+    PRIMARY KEY (salon_id),
+    CONSTRAINT FK_Salon_Manager FOREIGN KEY (manager_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Service (
@@ -36,17 +41,21 @@ CREATE TABLE IF NOT EXISTS Service (
 
 CREATE TABLE IF NOT EXISTS HairStyle (
     hair_id INT AUTO_INCREMENT,
+    manager_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     image VARCHAR(255) NOT NULL,
     description TEXT,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (hair_id)
+    PRIMARY KEY (hair_id),
+    CONSTRAINT FK_HairStyle_Manager FOREIGN KEY (manager_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Designer (
     designer_id INT AUTO_INCREMENT,
-    user_id INT NOT NULL,
+    user_id INT UNIQUE NOT NULL,
     experience INT NOT NULL,
     good_at VARCHAR(255) NOT NULL,
     personality VARCHAR(255) NOT NULL,
@@ -54,8 +63,9 @@ CREATE TABLE IF NOT EXISTS Designer (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (designer_id),
-    CONSTRAINT uq_designer_user UNIQUE (user_id),
-    CONSTRAINT fk_designer_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+    CONSTRAINT FK_Designer_User FOREIGN KEY (user_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Reservation (
@@ -65,26 +75,21 @@ CREATE TABLE IF NOT EXISTS Reservation (
     service_id INT NOT NULL,
     start_at DATETIME NOT NULL,
     end_at DATETIME NOT NULL,
-    status ENUM ('pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'no_show') NOT NULL DEFAULT 'pending',
+    status ENUM('pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'no_show') NOT NULL DEFAULT 'pending',
     cancelled_at DATETIME,
     cancel_reason TEXT,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (reservation_id),
-    CONSTRAINT fk_reservation_client FOREIGN KEY (client_id) REFERENCES Users(user_id),
-    CONSTRAINT fk_reservation_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id),
-    CONSTRAINT fk_reservation_service FOREIGN KEY (service_id) REFERENCES Service(service_id)
-);
-
-CREATE TABLE IF NOT EXISTS ReservationSlot (
-    reservation_id INT,
-    slot_date DATE NOT NULL,
-    slot_time TIME NOT NULL,
-    designer_id INT NOT NULL,
-    PRIMARY KEY (reservation_id),
-    CONSTRAINT fk_slot_reservation FOREIGN KEY (reservation_id) REFERENCES Reservation(reservation_id) ON DELETE CASCADE,
-    CONSTRAINT fk_slot_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id),
-    CONSTRAINT uk_rs_unique UNIQUE (slot_date, slot_time, designer_id)
+    CONSTRAINT FK_Reservation_Client FOREIGN KEY (client_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_Reservation_Designer FOREIGN KEY (designer_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_Reservation_Service FOREIGN KEY (service_id)
+        REFERENCES Service(service_id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS StorePolicy (
@@ -93,25 +98,31 @@ CREATE TABLE IF NOT EXISTS StorePolicy (
     PRIMARY KEY (policy_id)
 );
 
-CREATE TABLE IF NOT EXISTS News (
+CREATE TABLE IF NOT EXISTS NEWS (
     news_id INT AUTO_INCREMENT,
+    manager_id INT NOT NULL,
     name VARCHAR(255) NOT NULL,
     title VARCHAR(255) NOT NULL,
     content VARCHAR(100) NOT NULL,
     file VARCHAR(255),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (news_id)
+    PRIMARY KEY (news_id),
+    CONSTRAINT FK_NEWS_Manager FOREIGN KEY (manager_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS WorkingHour (
     wh_id INT AUTO_INCREMENT,
     designer_id INT NOT NULL,
-    weekday TINYINT NOT NULL COMMENT '근무일자(요일을 따로 쓰려면 tinyint/enum으로 변경 가능)',
+    weekday TINYINT NOT NULL,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
     PRIMARY KEY (wh_id),
-    CONSTRAINT fk_workinghour_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
+    CONSTRAINT FK_WorkingHour_Designer FOREIGN KEY (designer_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS TimeOff (
@@ -120,5 +131,9 @@ CREATE TABLE IF NOT EXISTS TimeOff (
     start_at DATE NOT NULL,
     end_at DATE NOT NULL,
     PRIMARY KEY (to_id),
-    CONSTRAINT fk_timeoff_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
+    CONSTRAINT FK_TimeOff_Designer FOREIGN KEY (designer_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+

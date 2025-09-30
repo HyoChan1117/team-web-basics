@@ -89,7 +89,7 @@
             echo "<tr>";
             echo "<td>$row[postID]</td>";
             echo "<td>$row[name]</td>";
-            echo "<td><a href='view.php?postID=$row[postID]'>$row[messageArea]</a></td>";
+            echo "<td><a href='read.php?postID=$row[postID]'>$row[messageArea]</a></td>";
             echo "<td>$row[created_at]</td>";
             echo "</tr>";
         }
