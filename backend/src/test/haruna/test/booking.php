@@ -1,5 +1,5 @@
 <?php
-    
+
     try{
         # DB연결
         require_once("./db_connect.php");
