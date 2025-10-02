@@ -35,6 +35,7 @@
                     ORDER BY date, start_at";
         $sql_client = "SELECT user_id FROM Users WHERE account='$session_account'";
         $sql_designer = "SELECT user_id, user_name FROM Users WHERE role='designer'";
+
         $sql_service = "SELECT * FROM Service";
 
         // 쿼리 실행

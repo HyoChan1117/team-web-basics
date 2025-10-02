@@ -124,3 +124,9 @@ INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
 
 INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
 ('2', '2025-10-04', '2025-10-07');
+=======
+INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
+('11', '2025-10-02', '2025-10-05');
+
+INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
+('12', '2025-10-04', '2025-10-07');
