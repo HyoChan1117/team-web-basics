@@ -180,7 +180,6 @@
             <?php while ($row = $result_designer->fetch_assoc()):; ?>
             <input type="radio" name="designer" value="<?= $row['user_id'] ?>"> <?= $row['user_name'] ?>
             <?php endwhile; ?>
-            
 
             <p><strong>TIME</strong></p>
             <input type="date" name="date" value="<?= $date ?>">
