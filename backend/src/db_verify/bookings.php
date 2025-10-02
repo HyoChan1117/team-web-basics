@@ -1,7 +1,10 @@
 <?php
 
     // 예약 시간 리스트
-    $time = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+    $time = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00",
+             "12:30", "13:00", "13:30", "14:00", "14:30", "15:00",
+             "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"];
+    
     $date = date("Y-m-d");
 
     // 로그인 정보 및 사용자 권한 허가 함수 불러오기
@@ -33,11 +36,14 @@
         $sql_client = "SELECT user_id FROM Users WHERE account='$session_account'";
         $sql_designer = "SELECT user_id, user_name FROM Users WHERE role='designer'";
 
+        $sql_service = "SELECT * FROM Service";
+
         // 쿼리 실행
         $result_to = $db_conn->query($sql_to);
         $result_rsv = $db_conn->query($sql_rsv);
         $result_client = $db_conn->query($sql_client);
         $result_designer = $db_conn->query($sql_designer);
+        $result_service = $db_conn->query($sql_service);
 
         // 고객
         $row_client = $result_client->fetch_assoc();
@@ -147,13 +153,20 @@
         </tr>
 
         <?php
+            if ($result_to->num_rows <= 0) {
+                echo "<tr><td colspan='4'>휴무 예정이 없습니다.</td></tr>";
+            }
+
+            $count_to = 1;
             while ($row = $result_to->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>$row[to_id]</td>";
+                echo "<td>$count_to</td>";
                 echo "<td>$row[designer_name]</td>";
                 echo "<td>$row[start_at]</td>";
                 echo "<td>$row[end_at]</td>";
                 echo "</tr>";
+
+                $count_to++;
             }
         ?>
     </table>
@@ -166,12 +179,9 @@
         <fieldset>
             <legend>예약 정보 입력</legend>
             <p><strong>SERVICE</strong></p>
-            <input type="checkbox" id="cut" name="service[]" value="커트">
-            <label for="cut">커트</label>
-            <input type="checkbox" id="perm" name="service[]" value="펌">
-            <label for="perm">펌</label>
-            <input type="checkbox" id="dyeing" name="service[]" value="염색">
-            <label for="dyeing">염색</label>
+            <?php while ($row = $result_service->fetch_assoc()):; ?>
+            <input type="checkbox" name="service[]" value="<?= $row['service_name'] ?>"> <?= $row['service_name'] ?>
+            <?php endwhile; ?>
 
             <p><strong>REQUIREMENT</strong></p>
             <textarea name="requirement" cols="30" rows="5"></textarea>
