@@ -27,8 +27,6 @@
             <label for="client">고객</label>
             <input type="radio" id="designer" name="role" value="designer">
             <label for="designer">디자이너</label>
-            <input type="radio" id="manager" name="role" value="manager">
-            <label for="manager">관리자</label>
 
             <p>이름</p>
             <input type="text" name="user_name" placeholder="이름을 입력하세요."><br>

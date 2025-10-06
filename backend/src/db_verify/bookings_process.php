@@ -7,8 +7,6 @@
         exit;
     }
 
-    redirection("유효하지 않는 값입니다.");
-
     // 입력값 유효성 검사
     $client = isset($_POST['client']) ? $_POST['client'] : '';
     $service = isset($_POST['service']) ? $_POST['service'] : '';
@@ -31,12 +29,31 @@
         require_once "./db_connect.php";
 
         // sql문 작성 (SELECT)
+        $sql_to = "SELECT * FROM TimeOff
+                   WHERE '$date' BETWEEN start_at AND end_at
+                   AND designer_id='$designer'";
         $sql_s = "SELECT * FROM Reservation WHERE designer_id='$designer'";
-
+        
         // 쿼리 실행
+        $result_to = $db_conn->query($sql_to); 
         $result_s = $db_conn->query($sql_s);
 
         // 예외 처리
+        // 디자이너 휴무일 예약 불가 처리
+        // 해당 디자이너 휴무일입니다. -> 예약 페이지 리다이렉션
+        if ($result_to->num_rows > 0) {
+            redirection("해당 디자이너 휴무일입니다.");
+        }
+
+        // 정기휴무일 예약 불가 처리
+        // 매주 일요일은 정기휴일입니다. -> 예약 페이지 리다이렉션
+        $holiday = 0;
+        $rsv_weekday = date('w', strtotime($date));
+
+        if ($holiday == $rsv_weekday) {
+            redirection("매주 일요일은 정기휴일입니다.");
+        }
+
         // 중복 예약 시간 처리
         // 디자이너(designer), 날짜(date), 시간(start_at), 상태(status) - cancel이 아닌 경우 중복처리
         // 중복된 예약 시간입니다. -> 예약 페이지 리다이렉션

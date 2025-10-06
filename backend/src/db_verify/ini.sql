@@ -80,7 +80,8 @@ CREATE TABLE IF NOT EXISTS Reservation (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (reservation_id),
-    CONSTRAINT fk_reservation_client FOREIGN KEY (client_id) REFERENCES Users(user_id),
+    CONSTRAINT fk_reservation_client FOREIGN KEY (client_id) REFERENCES Users(user_id)
+        ON DELETE CASCADE,
     CONSTRAINT fk_reservation_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
 );
 
@@ -101,16 +102,6 @@ CREATE TABLE IF NOT EXISTS News (
     PRIMARY KEY (news_id)
 );
 
-CREATE TABLE IF NOT EXISTS WorkingHour (
-    wh_id INT AUTO_INCREMENT,
-    designer_id INT NOT NULL,
-    weekday TINYINT NOT NULL COMMENT '근무일자(요일을 따로 쓰려면 tinyint/enum으로 변경 가능)',
-    start_time TIME NOT NULL,
-    end_time TIME NOT NULL,
-    PRIMARY KEY (wh_id),
-    CONSTRAINT fk_workinghour_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
-);
-
 CREATE TABLE IF NOT EXISTS TimeOff (
     to_id INT AUTO_INCREMENT,
     designer_id INT NOT NULL,
@@ -119,3 +110,23 @@ CREATE TABLE IF NOT EXISTS TimeOff (
     PRIMARY KEY (to_id),
     CONSTRAINT fk_timeoff_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
 );
+
+CREATE TABLE IF NOT EXISTS WorkingDay (
+    wd_id INT AUTO_INCREMENT,
+    designer_id INT NOT NULL,
+    weekday INT NOT NULL,
+    PRIMARY KEY (wd_id),
+    CONSTRAINT fk_workingday_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
+);
+
+INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
+('1', '2025-10-02', '2025-10-05');
+
+INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
+('2', '2025-10-04', '2025-10-07');
+=======
+INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
+('11', '2025-10-02', '2025-10-05');
+
+INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
+('12', '2025-10-04', '2025-10-07');
