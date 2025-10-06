@@ -30,12 +30,22 @@
     <fieldset>
         <form action="booking_process.php" method="post">
             SERVICE<br>
-            <input type="checkbox" name="service_name[]" value="CUT">CUT
+            <input type="checkbox" name="service_name[]" value="cut">CUT
             <input type="checkbox" name="service_name[]" value="perm">PERM
             <input type="checkbox" name="service_name[]" value="color">COLOR
             <br><br>
             REQUIREMENT<br>
             <textarea name="requirement" cols="30" rows="5"></textarea>
+            <br><br>
+            DAY<br>
+            <input type="date" name="date">
+            <br><br>
+            time<br>
+            <select name="time">
+                <?php for($i = 9 ;$i <= 18 ; $i++):?>
+                    <option value="<?=$i?>:00"><?=$i?>:00</option>    
+                <?php endfor; ?>
+            </select>
             <br><br>
             DESIGNER<br>
             <?php while($row = $result->fetch_assoc()):?>
