@@ -7,6 +7,10 @@
         # designer선택할 때 출력하기 위해 select로 designer 잦기
         $sql = "SELECT user_id, name FROM Users WHERE role='designer'";
         $result = $db_conn->query($sql);
+
+        # service Table 정보 가져 오기
+        $service_sql = "SELECT * FROM Service";
+        $service_query = $db_conn->query($service_sql);
     
     } catch(Exception $e){
         echo ''.$e->getMessage().'';
@@ -30,9 +34,13 @@
     <fieldset>
         <form action="booking_process.php" method="post">
             SERVICE<br>
-            <input type="checkbox" name="service_name[]" value="cut">CUT
-            <input type="checkbox" name="service_name[]" value="perm">PERM
-            <input type="checkbox" name="service_name[]" value="color">COLOR
+            <?php if($service_query && $service_query->num_rows > 0): ?>
+                <?php while ($sr = $service_query->fetch_assoc()):?>
+                    <input type="checkbox" name="service_id[]" value="<?=$sr['service_id']?>">
+                    <?= $sr['service_name'] ?>￥<?= $sr['price'] ?>
+                    <br>
+                    <?php endwhile; ?>
+            <?php endif; ?>
             <br><br>
             REQUIREMENT<br>
             <textarea name="requirement" cols="30" rows="5"></textarea>
@@ -54,9 +62,9 @@
             <br><br>
             <button>예약</button>
         </form>
-
-
     </fieldset>
+
+    <a href="main.php"><button>main</button></a>
 
 </body>
 
