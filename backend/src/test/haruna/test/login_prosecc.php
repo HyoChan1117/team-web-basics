@@ -1,4 +1,5 @@
 <?php
+    session_start();
     function redirect($msg, $file){
         header("Refresh: 2; URL='$file.php'");
         echo "$msg";
@@ -37,8 +38,11 @@
         # 해당 ID 있으면 pw가 맞는지 확인
         # pw 맞다 -> 예약 페이지로 이동하기
         if (password_verify($pw, $row['password'])){
+            # SESSION에 user_id, name, account 저장하기
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['name'] = $row['name'];
+            $_SESSION['account'] = $row['account'];
             redirect("로그인 성공!", "main");
-            ;
             exit;
         }else{  
         # pw 안맞다 -> 오류 표시하고 login.php로 돌아가기
