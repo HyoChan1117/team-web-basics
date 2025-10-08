@@ -26,8 +26,8 @@
         require_once("./db_connect.php");
 
         # Reservation Table에 INSERT하기
-        $rsv_sql = "INSERT INTO Reservation (client_id, designer_id, date, start_at, end_at, status, requirement) 
-                    VALUES('$_SESSION[user_id]', '$designer_id', '$date', '$time', '10:00', 'pending', '$requirement' )";
+        $rsv_sql = "INSERT INTO Reservation (client_id, designer_id, date, start_at, status, requirement) 
+                    VALUES('$_SESSION[user_id]', '$designer_id', '$date', '$time', 'pending', '$requirement' )";
         $rsv_query = $db_conn->query($rsv_sql);
         # 직전 INSERT의 AUTO_INCREMENT 취특하기
         $rsv_id = $db_conn->insert_id;
