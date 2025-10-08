@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS Users (
     PRIMARY KEY (user_id)
 );
 
+-- salon정보
 CREATE TABLE IF NOT EXISTS Salon (
     salon_id INT AUTO_INCREMENT,
     manager_id INT NOT NULL,
@@ -32,12 +33,51 @@ CREATE TABLE IF NOT EXISTS Salon (
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+-- 사비스 내용
 CREATE TABLE IF NOT EXISTS Service (
     service_id INT AUTO_INCREMENT,
     service_name VARCHAR(255) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (service_id)
 );
+
+-- 서비스 내용, 가격 관리
+CREATE TABLE ReservationService (
+  reservation_id INT NOT NULL,
+  service_id     INT NOT NULL,
+  qty            INT NOT NULL DEFAULT 1,
+  unit_price     DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (reservation_id, service_id),
+  FOREIGN KEY (reservation_id) REFERENCES Reservation(reservation_id)
+    ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (service_id) REFERENCES Service(service_id)
+    ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+-- 예약 내용
+CREATE TABLE IF NOT EXISTS Reservation (
+    reservation_id INT AUTO_INCREMENT,
+    client_id INT NOT NULL,
+    designer_id INT NOT NULL,
+    date DATE NOT NULL,
+    start_at DATETIME NOT NULL,
+    end_at DATETIME NOT NULL,
+    status ENUM('pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'no_show') NOT NULL DEFAULT 'pending',
+    requirement TEXT,
+    cancelled_at DATETIME,
+    cancel_reason TEXT,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (reservation_id),
+    CONSTRAINT FK_Reservation_Client FOREIGN KEY (client_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_Reservation_Designer FOREIGN KEY (designer_id)
+        REFERENCES Users(user_id)
+        ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+
 
 CREATE TABLE IF NOT EXISTS HairStyle (
     hair_id INT AUTO_INCREMENT,
@@ -68,31 +108,7 @@ CREATE TABLE IF NOT EXISTS Designer (
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Reservation (
-    reservation_id INT AUTO_INCREMENT,
-    client_id INT NOT NULL,
-    designer_id INT NOT NULL,
-    service_id INT NOT NULL,
-    date DATE NOT NULL,
-    start_at DATETIME NOT NULL,
-    end_at DATETIME NOT NULL,
-    status ENUM('pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'no_show') NOT NULL DEFAULT 'pending',
-    requirement TEXT,
-    cancelled_at DATETIME,
-    cancel_reason TEXT,
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (reservation_id),
-    CONSTRAINT FK_Reservation_Client FOREIGN KEY (client_id)
-        REFERENCES Users(user_id)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT FK_Reservation_Designer FOREIGN KEY (designer_id)
-        REFERENCES Users(user_id)
-        ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT FK_Reservation_Service FOREIGN KEY (service_id)
-        REFERENCES Service(service_id)
-        ON UPDATE CASCADE ON DELETE CASCADE
-);
+
 
 CREATE TABLE IF NOT EXISTS StorePolicy (
     policy_id INT AUTO_INCREMENT,
