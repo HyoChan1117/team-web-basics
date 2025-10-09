@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    # 서비스 메뉴, 메시지, Day, time, 디지너ID의 값을 받는다 
+    # 선택된 서비스 메뉴, 메시지, Day, time, 디지너ID의 값을 받는다 
     $service_id = isset($_POST['service_id']) ? $_POST['service_id'] : '';
     $requirement = isset($_POST['requirement']) ? $_POST['requirement'] : '';
     $date = isset($_POST['date']) ? $_POST['date'] : '';
@@ -19,7 +19,6 @@
     
     # implode => 배열을 문자열으로 바꾸는 함수
     $service_ids = implode(",", $service_id);
-
         
     try {
         # DB연결
