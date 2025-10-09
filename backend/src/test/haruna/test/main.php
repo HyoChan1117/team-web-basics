@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mainpage</title>
+    <title>main</title>
 </head>
 <body></body>
     <h1>mainpage</h1>
@@ -20,5 +20,6 @@
 
     <br>
     <a href="booking.php">예약 하기</a>
+    <a href="logout.php">로그아웃 하기</a>
 </body>
 </html>

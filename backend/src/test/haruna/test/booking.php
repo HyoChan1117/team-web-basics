@@ -32,7 +32,7 @@
     <h1>BOOKING</h1>
     <hr>
     <fieldset>
-        <form action="booking_process.php" method="post">
+        <form action="booking_check.php" method="post">
             SERVICE<br>
             <?php if($service_query && $service_query->num_rows > 0): ?>
                 <?php while ($sr = $service_query->fetch_assoc()):?>
@@ -41,7 +41,7 @@
                     <br>
                     <?php endwhile; ?>
             <?php endif; ?>
-            <br><br>
+            <br>
             REQUIREMENT<br>
             <textarea name="requirement" cols="30" rows="5"></textarea>
             <br><br>
@@ -60,7 +60,7 @@
                     <input type="radio" name="designer_id" value="<?=$row['user_id']?>"><?=$row['name']?>            
             <?php endwhile;?>
             <br><br>
-            <button>예약</button>
+            <button>확인</button>
         </form>
     </fieldset>
 
