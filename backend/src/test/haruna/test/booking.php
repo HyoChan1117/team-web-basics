@@ -16,6 +16,9 @@
         echo ''.$e->getMessage().'';
     }
 
+    // DB 종료
+    $db_conn->close();
+
 ?>
 
 
