@@ -5,7 +5,7 @@
     $password = 'root';
     $database = 'kin';
 
-    // db connect 
-    $db_conn = new mysqli($hostname, $username, $password, $database);
+    // db connect
+    $db_conn = new mysqli($hostname, $username, $password, $database);   
 
 ?>

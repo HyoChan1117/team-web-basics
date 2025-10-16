@@ -23,13 +23,13 @@
         require_once "./db_config.php";
 
         // sql statement
-        $sql = "SELECT * FROM guestbook $where ORDER BY id DESC LIMIT $limit OFFSET $offset";
+        $sql = "SELECT * FROM board $where ORDER BY postID DESC LIMIT $limit OFFSET $offset";
 
         // Run query
         $result = $db_conn->query($sql);
 
         // count post 
-        $totalSql = "SELECT COUNT(*) total FROM guestbook";
+        $totalSql = "SELECT COUNT(*) total FROM board";
         $totalResult = $db_conn->query($totalSql);
         $totalRow = $totalResult->fetch_assoc();
         $total = $totalRow ['total'];
@@ -87,9 +87,9 @@
     }else{
         while($row = $result->fetch_assoc()){
             echo "<tr>";
-            echo "<td>$row[id]</td>";
+            echo "<td>$row[postID]</td>";
             echo "<td>$row[name]</td>";
-            echo "<td><a href='view.php?id=$row[id]'>$row[messageArea]</a></td>";
+            echo "<td><a href='read.php?postID=$row[postID]'>$row[messageArea]</a></td>";
             echo "<td>$row[created_at]</td>";
             echo "</tr>";
         }
