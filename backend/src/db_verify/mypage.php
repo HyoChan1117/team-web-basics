@@ -159,7 +159,7 @@
                 echo "</table><br>";
 
                 // 종료 시간 설정
-                echo "<form action='end_at.php' method='get'>";
+                echo "<form action='time_end_at.php' method='get'>";
                 echo "<fieldset>";
                 echo "<legend>종료 시간 설정</legend>";
                 echo "<p>예약 선택</p>";
