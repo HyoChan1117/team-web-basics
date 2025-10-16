@@ -29,10 +29,16 @@
         require_once "./db_connect.php";
 
         // sql문 작성 (SELECT)
+        // 디자이너 휴무 처리
         $sql_to = "SELECT * FROM TimeOff
                    WHERE '$date' BETWEEN start_at AND end_at
                    AND designer_id='$designer'";
-        $sql_s = "SELECT * FROM Reservation WHERE designer_id='$designer'";
+        // 중복 예약 처리
+        $sql_s = "SELECT * FROM Reservation WHERE designer_id='$designer'
+                  AND start_at <= '$start_at'
+                  AND end_at > '$start_at'
+                  AND date='$date'
+                  AND status!='cancelled'";
         
         // 쿼리 실행
         $result_to = $db_conn->query($sql_to); 
@@ -55,17 +61,13 @@
         }
 
         // 중복 예약 시간 처리
-        // 디자이너(designer), 날짜(date), 시간(start_at), 상태(status) - cancel이 아닌 경우 중복처리
-        // 중복된 예약 시간입니다. -> 예약 페이지 리다이렉션
-        while ($row = $result_s->fetch_assoc()) {
-            if ($row['designer_id'] == $designer && $row['date'] == $date && $row['start_at'] == "$start_at:00" && $row['status'] != "cancelled") {
-                    redirection("중복된 예약 시간입니다.");
-            }
+        if ($result_s->num_rows > 0) {
+            redirection("중복되는 예약 시간입니다.");
         }
 
         // sql문 작성 (INSERT)
-        $sql_i = "INSERT INTO Reservation (client_id, designer_id, service, requirement, date, start_at, status)
-                  VALUES ('$client', '$designer', '$services', '$requirement', '$date', '$start_at', 'pending')";
+        $sql_i = "INSERT INTO Reservation (client_id, designer_id, service, requirement, date, start_at, end_at, status)
+                  VALUES ('$client', '$designer', '$services', '$requirement', '$date', '$start_at', '$start_at', 'pending')";
 
         // 쿼리 실행
         $result_i = $db_conn->query($sql_i);
