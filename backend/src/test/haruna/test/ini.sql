@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Salon (
 CREATE TABLE IF NOT EXISTS Service (
     service_id INT AUTO_INCREMENT,
     service_name VARCHAR(255) NOT NULL,
-    price DECIMAL(10,2) NOT NULL,
+    price INT NOT NULL,
     PRIMARY KEY (service_id)
 );
 

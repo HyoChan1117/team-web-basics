@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS Users(
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    account VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    gender VARCHAR(100) NOT NULL,
+    role ENUM('client', 'designer', 'manager') NOT NULL DEFAULT 'client',
+    phone VARCHAR(30), 
+    birth DATE,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+);
