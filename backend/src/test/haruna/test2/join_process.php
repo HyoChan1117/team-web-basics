@@ -18,25 +18,33 @@
     }
 
     try {
-    # DB 연결하기
-    require_once("./db_conn.php");
+            
+        # DB 연결하기
+        require_once("./db_conn.php");
 
-    # pw hash 저리
-    $pw_hash = password_hash($password, PASSWORD_DEFAULT);
+        # select로 Users table 정보 가져가기
+        $check_sql = "SELECT * FROM Users WHERE account = '$account'";
+        $check_result = $db_conn->query($check_sql);
+        # accountID 중복 여부 확인
+        # accountID 중복이 있으면 오류 표시하고 join.php로 돌아가기
+        if ($check_result -> num_rows > 0) {
+            header("Refresh: 2; URL='join.php'");
+            echo "중복이 된 ID입니다.";
+            exit;
+        }
 
-    # Usertable에 INSERT하기
-    $sql = "INSERT INTO Users (account, password, name, gender, role, phone, birth) 
-                VALUES ('$account','$pw_hash','$name','$gender','$role','$phone', '$birth')";
-    $result = $db_conn->query($sql);
+        # accountID 중복이 없으면 pw hash 저리
+        $pw_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    # SESSION에 이름, role, account, 정보 저장하기
-    $_SESSION['name'] = $name;
-    $_SESSION['account'] = $account;
-    $_SESSION['role'] = $role;
+        # Usertable에 INSERT하기
+        $sql = "INSERT INTO Users (account, password, name, gender, role, phone, birth) 
+                    VALUES ('$account','$pw_hash','$name','$gender','$role','$phone', '$birth')";
+        $result = $db_conn->query($sql);
 
-    # 성공하면 login으로 이동하기
-    header("Refresh: 2; URL='login.php'");
-    
+        # 성공하면 login으로 이동하기
+        header("Refresh: 2; URL='login.php'");
+        echo "회원가입 완료했습니다!";
+        
     } catch(Throwable $e) {
         echo "서버 오류 발생".$e;
     } 
