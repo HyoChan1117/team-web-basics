@@ -22,5 +22,6 @@
             <button>send</button>
         </fieldset>
     </form>
+    <a href="join.php">-회원가입-</a>
 </body>
 </html>

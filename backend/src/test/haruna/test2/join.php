@@ -18,7 +18,7 @@
         👤 Id <br>
         <input type="text" name="account"><br>
         ♧ Name<br>
-        <input type="text" name="name"><br>
+        <input type="text" name="user_name"><br>
         🗝 Password<br>
         <input type="password" name="password">
         <br>
@@ -30,7 +30,7 @@
         <input type="radio" name="gender" value="men">men🚹
         <input type="radio" name="gender" value="women">women🚺
         <br><br>
-        <button>stend</button>
+        <button>submit</button>
         </fieldset>
     </form>
     <a href="login.php">-login-</a>

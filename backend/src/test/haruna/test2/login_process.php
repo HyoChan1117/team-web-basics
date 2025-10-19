@@ -31,7 +31,7 @@
         # account 있으면 password 확인
         # password 맞으면 SESSION에 account, role, 이름을 저장
         if(password_verify( $password, $row['password'])){
-            $_SESSION['name'] = $row['name'];
+            $_SESSION['user_name'] = $row['user_name'];
             $_SESSION['account'] = $row['account'];
             $_SESSION['role'] = $row['role'];
             
@@ -39,7 +39,11 @@
             header("Refresh: 2; URL='mypage.php'");
             echo "로그인 성공했습니다. Mypage로 이동합니다.";
             exit;
-        } 
+        } else {
+            header("Refresh: 2; URL='logn.php'");
+            echo "비밀 번호가 틀렸습니다.";
+            exit;
+        }
 
     } catch (Exception $e) {
         echo "서버 오류가 발생했습니다." . $e;
