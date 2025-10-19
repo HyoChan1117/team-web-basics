@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS Reservation (
     requirement TEXT,
     date DATE NOT NULL,
     start_at TIME NOT NULL,
-    end_at TIME,
+    end_at TIME NOT NULL,
     status ENUM ('pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'no_show') NOT NULL DEFAULT 'pending',
     cancelled_at DATETIME,
     cancel_reason TEXT,
@@ -124,9 +124,3 @@ INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
 
 INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
 ('2', '2025-10-04', '2025-10-07');
-=======
-INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
-('11', '2025-10-02', '2025-10-05');
-
-INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
-('12', '2025-10-04', '2025-10-07');
