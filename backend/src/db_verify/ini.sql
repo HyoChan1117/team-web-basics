@@ -80,7 +80,8 @@ CREATE TABLE IF NOT EXISTS Reservation (
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (reservation_id),
-    CONSTRAINT fk_reservation_client FOREIGN KEY (client_id) REFERENCES Users(user_id)
+    CONSTRAINT fk_reservation_client 
+        FOREIGN KEY (client_id) REFERENCES Users(user_id)
         ON DELETE CASCADE,
     CONSTRAINT fk_reservation_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
 );
