@@ -2,7 +2,7 @@
     // get the postID
     $postID = isset($_GET['postID']) ? $_GET['postID']: '';
 
-    // Get the name, password, content
+    // post the name, password, content
     $name = isset($_POST['name']) ? $_POST['name']: '';
     $password = isset($_POST['password']) ? $_POST['password']: '';
     $content = isset($_POST['messageArea']) ? $_POST['messageArea']: '';

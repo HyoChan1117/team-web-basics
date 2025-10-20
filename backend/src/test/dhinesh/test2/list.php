@@ -43,7 +43,7 @@
 
     }catch(Exception $e) {
         // db error
-        echo "DB erro".$e;
+        echo "DB error".$e;
     }
     // db close
     $db_conn-> close();

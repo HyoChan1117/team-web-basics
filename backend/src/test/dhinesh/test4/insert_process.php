@@ -2,7 +2,7 @@
     // input validation
     $name = isset($_POST['name']) ? $_POST['name']: '';
     $title = isset($_POST['title']) ? $_POST['title']: '';
-    $content = isset($_POST['content']) ? $_POST['content']: '';
+    $content = isset($_POST['messageArea']) ? $_POST['messageArea']: '';
     
     // if the is invalid redirect to the form.html page
     if(empty($name) || empty($title) || empty($content)){
