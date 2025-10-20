@@ -30,11 +30,8 @@
         <li><a href="mypage.php">mypage</a></li>
     </ul>
     <h1>MYPAGE</h1>
-    <br>
-    <?php if($_SESSION['role'] == 'clien'):?>
-        <fieldset>
-            <?php  ?>
-        </fieldset>
+    <?php if($_SESSION['role'] == 'client'):?>
+        <?php require_once("./client.php"); ?>
     <?php endif;?>
     
 </body>
