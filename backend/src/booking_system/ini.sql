@@ -112,13 +112,6 @@ CREATE TABLE IF NOT EXISTS TimeOff (
     CONSTRAINT fk_timeoff_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
 );
 
-CREATE TABLE IF NOT EXISTS WorkingDay (
-    wd_id INT AUTO_INCREMENT,
-    designer_id INT NOT NULL,
-    weekday INT NOT NULL,
-    PRIMARY KEY (wd_id),
-    CONSTRAINT fk_workingday_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
-);
 
 INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
 ('1', '2025-10-02', '2025-10-05');

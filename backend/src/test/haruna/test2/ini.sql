@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS Reservation (
     client_id INT NOT NULL,
     designer_id INT NOT NULL,
     requirement TEXT,
+    service VARCHAR(100) NOT NULL,
     date DATE NOT NULL,
     start_at TIME NOT NULL,
     end_at TIME ,
