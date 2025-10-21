@@ -86,12 +86,6 @@ CREATE TABLE IF NOT EXISTS Reservation (
     CONSTRAINT fk_reservation_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
 );
 
-CREATE TABLE IF NOT EXISTS StorePolicy (
-    policy_id INT AUTO_INCREMENT,
-    cancel_deadline TIME NOT NULL,
-    PRIMARY KEY (policy_id)
-);
-
 CREATE TABLE IF NOT EXISTS News (
     news_id INT AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
