@@ -35,28 +35,26 @@
     <title>Document</title>
 </head>
 <body>
-    나의 예약 정보    
-
-    <table border="2">
-        
+    나의 예약 정보
+    <?php if($rv_result->num_rows <= 0) :?>
+        <fieldset>예약이 없습니다.</fieldset>
+    <?php else:?>
+        <table border="2">   
         <th>Day</th>
         <th>Time</th>
         <th>Service</th>
         <th>requirement</th>
-        <th>designer</th>
-
-        <?php if($rv_result->num_rows <= 0) :?>
-            예약이 없습니다.
-        <?php endif;?>      
-            <tr>
-                <td><?=$rv_row['date']?></td>
-                <td><?=$rv_row['start_at']?></td>
-                <td><?php while($sv_row = $sv_result->fetch_assoc()):?>
-                    <?= $sv_row['service_name'] ?>
-                    <?php endwhile;?></td>
-                <td><?=$rv_row['requirement']?></td>
-                <td><?=$dr_row['user_name']?></td>
-            </tr> 
+        <th>designer</th>     
+        <tr>
+            <td><?=$rv_row['date']?></td>
+            <td><?=$rv_row['start_at']?></td>
+            <td><?php while($sv_row = $sv_result->fetch_assoc()):?>
+                <?= $sv_row['service_name'] ?>
+                <?php endwhile;?></td>
+            <td><?=$rv_row['requirement']?></td>
+            <td><?=$dr_row['user_name']?></td>    
+        </tr>
+        <?php endif; ?>
       
     </table>
 
