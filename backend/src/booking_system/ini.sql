@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS TimeOff (
     CONSTRAINT fk_timeoff_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
 );
 
+
 INSERT INTO TimeOff (designer_id, start_at, end_at) VALUES
 ('1', '2025-10-02', '2025-10-05');
 

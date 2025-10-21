@@ -16,16 +16,17 @@
         <input type="radio" name="role" value="manager">manager
         <hr>
         👤 Id <br>
-        <input type="text" name="account"><br>
+        <input type="text" name="account" placeholder="id를 입력하세요."><br><br>
         ♧ Name<br>
-        <input type="text" name="user_name"><br>
+        <input type="text" name="user_name" placeholder="이름을 입력하세요."><br><br>
         🗝 Password<br>
-        <input type="password" name="password">
-        <br>
+        <input type="password" name="password" placeholder="비밀 번호를 입력하세요."><br>
+        <input type="password" name="password2" placeholder="비밀 번호를 재입력하세요.">
+        <br><br>
         ☏ Phone Number<br>
-        <input type="text" name="phone"><br>
+        <input type="text" name="phone" placeholder="'-'없이 전화번호를 입력하세요."><br><br>
         🎂 Birthday<br>
-        <input type="DATE" name="birth" ><br><br>
+        <input type="DATE" name="birth" value="<?= date("Y-m-d") ?>" ><br><br>
         🚻 gender <br>
         <input type="radio" name="gender" value="men">men🚹
         <input type="radio" name="gender" value="women">women🚺

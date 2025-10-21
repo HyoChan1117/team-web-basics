@@ -1,3 +1,4 @@
+
 <?php
     try{
         require_once("./db_conn.php");
@@ -7,18 +8,11 @@
         $rv_row = $rv_result->fetch_assoc();
 
         # Users에서 designer_id를 사용해서 디자이너 이름 가져오기
-        $dr_sql = "SELECT user_name FROM Users WHERE user_id = '$rv_row[designer_id]'";
-        $dr_result = $db_conn->query($dr_sql);
-        $dr_row = $dr_result->fetch_assoc();
-  
-        # ReservationService에서 reservation_id를 사용해서 내용을 가져오기
-        $rv_sv_sql = "SELECT * FROM ReservationService WHERE reservation_id = '$rv_row[reservation_id]'";
-        $rv_sv_result = $db_conn->query($rv_sv_sql);
-        $rv_sv_row = $rv_sv_result->fetch_assoc();
-
-        # Service에서 service_id를 사용해서 내용을 가져오기
-        $sv_sql = "SELECT * FROM Service WHERE service_id = '$rv_sv_row[service_id]'";
-        $sv_result = $db_conn->query($sv_sql);
+        if($rv_result->num_rows > 0) {
+          $dr_sql = "SELECT user_name FROM Users WHERE user_id = '$rv_row[designer_id]'";
+          $dr_result = $db_conn->query($dr_sql);
+          $dr_row = $dr_result->fetch_assoc();
+        }
         
 
     } catch (Exception $e) {
@@ -41,16 +35,16 @@
     <?php else:?>
         <table border="2">   
         <th>Day</th>
-        <th>Time</th>
+        <th>start_at</th>
+        <th>end_at</th> 
         <th>Service</th>
         <th>requirement</th>
         <th>designer</th>     
         <tr>
             <td><?=$rv_row['date']?></td>
             <td><?=$rv_row['start_at']?></td>
-            <td><?php while($sv_row = $sv_result->fetch_assoc()):?>
-                <?= $sv_row['service_name'] ?>
-                <?php endwhile;?></td>
+            <td><?=$rv_row['end_at']?></td>
+            <td><?=$rv_row['service']?></td>
             <td><?=$rv_row['requirement']?></td>
             <td><?=$dr_row['user_name']?></td>    
         </tr>
