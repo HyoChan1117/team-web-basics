@@ -31,6 +31,7 @@
         # account 있으면 password 확인
         # password 맞으면 SESSION에 account, role, 이름을 저장
         if(password_verify( $password, $row['password'])){
+            $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['user_name'] = $row['user_name'];
             $_SESSION['account'] = $row['account'];
             $_SESSION['role'] = $row['role'];
