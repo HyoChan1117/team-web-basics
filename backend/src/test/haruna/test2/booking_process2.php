@@ -23,15 +23,7 @@
         require_once("./db_conn.php");
 
         # Reservation테이블을 불어와서 date, time의 중복 여부를 확인
-        // $day_time_sql  = "SELECT 1 FROM Reservation WHERE date='$date' AND designer_id='$designer_id' AND
-        //                     start_at < '$time' AND  end_at ";
-        // $day_time_result = $db_conn->query($day_time_sql);
-        # 중복이 되면 오류 표시하고 booking.php로 돌아 가기
-        // if ($day_time_result->num_rows > 0) {
-        //     header("Refresh: 2; URL='booking.php'");
-        //     echo "서넥한 시간은 예약 불가입니가.날짜 또는 디자이너를 바꿔서 다시 입력하세요.";
-        //     exit;
-        // }
+        
         
         # data & time이 중복이 없으면 Reservation테이블에 INSERT 하기  
         $rv_sql = "INSERT INTO Reservation (client_id, designer_id, service, requirement, date, start_at, end_at)
