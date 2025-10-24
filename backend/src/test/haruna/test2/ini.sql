@@ -21,13 +21,14 @@ CREATE TABLE IF NOT EXISTS Service (
     service_id INT AUTO_INCREMENT,
     service_name VARCHAR(255) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
+    duration_min INT NOT NULL DEFAULT 60, 
     PRIMARY KEY (service_id)
 );
 
-INSERT INTO Service (service_name, price) VALUES
-        ('CUT',40000),
-        ('PERM', 80000),
-        ('COLOR', 60000)
+INSERT INTO Service (service_name, price, duration_min) VALUES
+        ('CUT',40000, 60),
+        ('PERM', 80000, 100),
+        ('COLOR', 60000, 80)
 ;
 
 -- 예약 내용
