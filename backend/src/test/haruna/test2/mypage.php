@@ -28,7 +28,7 @@
         <li><a href="service.php">service</a></li>
         <li><a href="hair_style.php">hair style</a></li>
         <li><a href="staff.php">staff</a></li>
-        <li><a href="booking2.php">booking</a></li>
+        <li><a href="booking1.php">booking</a></li>
         <li><a href="news.php">news</a></li>
         <li><a href="mypage.php">mypage</a></li>
     </ul>

@@ -1,7 +1,7 @@
 <?php
-    $times = ["09:00","09:30","10:00","10:30","11:00","11:30", "12:00", 
-                "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
-                "16:00", "16:30", "17:00", "17:30", "18:00"];
+    $times = ["09:00:00","09:30:00","10:00:00","10:30:00","11:00:00","11:30:00", "12:00:00", 
+                "12:30:00", "13:00:00", "13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00",
+                "16:00:00", "16:30:00", "17:00:00", "17:30:00", "18:00:00"];
 
     try{
         # DB연결하기
@@ -33,7 +33,7 @@
     <!--예약 정보 입력 받기-->
     <!--service, designer, day, time, requirement-->
     <fieldset>
-        <form action="booking_process.php" method="post">
+        <form action="booking_process1.php" method="post">
         ✂ Service <br>
         <?php while ($sv_row = $sv_result->fetch_assoc()):?>
             <input type="checkbox" name="service_id[]" value="<?= $sv_row['service_id']?>"><?=$sv_row['service_name'] ?>        
@@ -47,7 +47,7 @@
         <?php endwhile; ?>
         <br><br>
         📅 day<br>
-        <input type="date" name="date" value="<?= date("Y-m-d") ?>">
+        <input type="date" name="date" value="<?= date("Y-m-d") ?>" required>
         <br><br>
         🕘 time<br>
         <select name="time">

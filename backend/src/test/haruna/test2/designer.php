@@ -29,13 +29,16 @@
     <title>designer</title>
 </head>
 <body>
-    예약 상황
+    고객 예약 상황
     <br>
     <?php if($result->num_rows <= 0): ?>
         <fieldset>
         예약이 없습니다.
         </fieldset>
     <?php else:?>
+                                           
+    <?php $count = 1 ?>
+    <?php while($row = $result->fetch_assoc()): ?>
         <table border="2">
             <th>예약번호</th>
             <th>고객 이름</th>
@@ -48,9 +51,7 @@
             <th>cancelled_at</th>
             <th>cancel_reason</th>
             <th>created_at</th>
-            <th>updated_at</th>                                     
-    <?php $count = 1 ?>
-    <?php while($row = $result->fetch_assoc()): ?>
+            <th>updated_at</th>  
         <tr>
         <td><?= $count?></td>
         <?php $count += 1?>
@@ -67,8 +68,20 @@
         <td><?= $row['updated_at'] ?></td>
         </tr>     
         </table>
+            status
+            <form action="status.php" method="post">
+            <input type="hidden" name="reservation_id" value="<?=$row['reservation_id']?>">
+            <select name="status">
+            <option value="checked_in">checked_in</option>
+            <option value="completed">completed</option>
+            <option value="no_show">no_show</option>
+            </select>
+            <button>submit</button>
+            <hr>
+            <br>
     <?php endwhile; ?>
     <?php endif; ?>
+    </form>
 
  
 </body>
