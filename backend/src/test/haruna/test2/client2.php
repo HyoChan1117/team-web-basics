@@ -3,16 +3,23 @@
     try{
         require_once("./db_conn.php");
         # Reservation테이블에서 select로 $SESSION['user_id']의 예약 정보를 가져 오기
-        $rv_sql = "SELECT * FROM Reservation WHERE client_id = '$_SESSION[user_id]'";
+        $rv_sql = "SELECT
+        r.reservation_id,
+        r.`date`,
+        r.start_at,
+        r.end_at,
+        (SELECT GROUP_CONCAT(s.service_name ORDER BY s.service_id SEPARATOR ', ')
+           FROM Service s
+           WHERE FIND_IN_SET(s.service_id, r.service)) AS service_names,
+        r.requirement,
+        u.user_name AS designer_name
+      FROM Reservation r
+      JOIN Users u ON u.user_id = r.designer_id
+      WHERE r.client_id = $_SESSION[user_id]
+      ORDER BY r.`date`, r.start_at
+    ";
         $rv_result = $db_conn->query($rv_sql);
         $rv_row = $rv_result->fetch_assoc();
-
-        # Users에서 designer_id를 사용해서 디자이너 이름 가져오기
-        if($rv_result->num_rows > 0) {
-          $dr_sql = "SELECT user_name FROM Users WHERE user_id = '$rv_row[designer_id]'";
-          $dr_result = $db_conn->query($dr_sql);
-          $dr_row = $dr_result->fetch_assoc();
-        }
         
 
     } catch (Exception $e) {
@@ -30,7 +37,7 @@
 </head>
 <body>
     나의 예약 정보
-    <?php if($rv_result->num_rows <= 0) :?>
+    <?php if($rv_result->num_rows === 0) :?>
         <fieldset>예약이 없습니다.</fieldset>
     <?php else:?>
         <table border="2">   
@@ -44,9 +51,9 @@
             <td><?=$rv_row['date']?></td>
             <td><?=$rv_row['start_at']?></td>
             <td><?=$rv_row['end_at']?></td>
-            <td><?=$rv_row['service']?></td>
+            <td><?=$rv_row['service_names']?></td>
             <td><?=$rv_row['requirement']?></td>
-            <td><?=$dr_row['user_name']?></td>    
+            <td><?=$rv_row['designer_name']?></td>    
         </tr>
         <?php endif; ?>
       

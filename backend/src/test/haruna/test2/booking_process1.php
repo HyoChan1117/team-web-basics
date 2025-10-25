@@ -1,14 +1,14 @@
 <?php
     session_start();
     # service_id, designer_id, day, time, requirement 의 값을 받는다.
-    $service_name = $_POST['service_name'] ?? null ;
+    $service_id = $_POST['service_id'] ?? null ;
     $designer_id = isset($_POST['designer_id']) ? $_POST['designer_id'] : '' ;
     $date = isset($_POST['date']) ? $_POST['date'] : '' ;
     $time = isset($_POST['time']) ? $_POST['time'] : '' ;
     $requirement = isset($_POST['requirement']) ? $_POST['requirement'] : '' ;
     
     # 유호성 확인
-    if(!is_array($service_name) || count($service_name) === 0 ||
+    if(!is_array($service_id) || count($service_id) === 0 ||
         $designer_id == '' || $date == '' || $time == '' ) {
         header("Refresh: 2; URL='booking.php'");
         echo "잘못한 접근입니다.";
@@ -16,7 +16,7 @@
     }
     
     # service_id를 
-    $services_name = implode(",",$service_name);
+    $service_ids = implode(",",$service_id);
 
     try {
         # DB연결 하기
@@ -26,8 +26,12 @@
         
         
         # data & time이 중복이 없으면 Reservation테이블에 INSERT 하기  
-        $rv_sql = "INSERT INTO Reservation (client_id, designer_id, service, requirement, date, start_at, end_at)
-                    VALUES ('$_SESSION[user_id]', '$designer_id', '$services_name', '$requirement', '$date', '$time',NULL)";
+        $rv_sql = "INSERT INTO Reservation
+                    (client_id, designer_id, service, requirement, date, start_at, end_at)
+                    SELECT '$_SESSION[user_id]', '$designer_id', '$service_ids', '$requirement', 
+                    '$date', '$time',ADDTIME('{$time}', SEC_TO_TIME(SUM(s.duration_min*60)))
+                    FROM Service s
+                    WHERE s.service_id IN ($service_ids)";
         $rv_result = $db_conn->query($rv_sql);
         
         # Reservation의 최신 reservation_id를 가져오
