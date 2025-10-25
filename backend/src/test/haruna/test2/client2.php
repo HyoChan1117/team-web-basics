@@ -16,8 +16,8 @@
       FROM Reservation r
       JOIN Users u ON u.user_id = r.designer_id
       WHERE r.client_id = $_SESSION[user_id]
-      ORDER BY r.`date`, r.start_at
-    ";
+      ORDER BY r.`date`, r.start_at";
+      
         $rv_result = $db_conn->query($rv_sql);
         $rv_row = $rv_result->fetch_assoc();
         
