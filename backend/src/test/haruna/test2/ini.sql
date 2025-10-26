@@ -67,3 +67,32 @@ CREATE TABLE IF NOT EXISTS ReservationService (
     FOREIGN KEY (service_id) REFERENCES Service(service_id)
         ON UPDATE CASCADE ON DELETE RESTRICT    
 );
+
+CREATE TABLE IF NOT EXISTS Designer (
+    designer_id INT AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    experience INT NOT NULL,
+    good_at VARCHAR(255) NOT NULL,
+    personality VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (designer_id),
+    CONSTRAINT uq_designer_user UNIQUE (user_id),
+    CONSTRAINT fk_designer_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+);
+
+INSERT INTO Designer 
+    (user_id, experience, good_at, personality, message, created_at, )
+    VALUES (3, '3', '레이어드컷', '활발하다', '예쁜 공간에서 이미지와 1: 1 맞춤 상담을 통해 진심을 담아 디자인을 선물해드리겠습니다:)'),
+    (5, '10', '내추럴 스타일', '조용하다', '최손을 다해서 고객님에 잘 올리는 스타일을 제공합니다.');
+
+CREATE TABLE IF NOT EXISTS News (
+    news_id INT AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    file VARCHAR(255),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (news_id)
+);

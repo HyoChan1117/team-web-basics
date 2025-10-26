@@ -5,13 +5,16 @@
         require_once("./db_conn.php");
 
         # $_SESSION['user_id']를 사용해서 Reservation에 있는 자신의 고객 예약 상황을 검색
-        $sql = "SELECT 
+        $sql = "SELECT
                 r.*,
-                u.user_name AS client_name
+                u.user_name AS client_name,
+                (SELECT GROUP_CONCAT(s.service_name ORDER BY FIELD(s.service_id, r.service) SEPARATOR ', ')
+                FROM Service AS s
+                WHERE FIND_IN_SET(s.service_id, r.service)) AS service_names
                 FROM Reservation AS r
                 JOIN Users AS u
                 ON r.client_id = u.user_id
-                WHERE r.designer_id='$_SESSION[user_id]'";
+                WHERE r.designer_id = '$_SESSION[user_id]'";
         $result = $db_conn->query($sql);
  
     } catch(Exception $e){
@@ -56,7 +59,7 @@
         <td><?= $count?></td>
         <?php $count += 1?>
         <td><?= $row['client_name'] ?></td>
-        <td><?= $row['service'] ?></td>
+        <td><?= $row['service_names'] ?></td>
         <td><?= $row['date'] ?></td>
         <td><?= $row['start_at'] ?></td>
         <td><?= $row['end_at'] ?></td>
@@ -68,7 +71,7 @@
         <td><?= $row['updated_at'] ?></td>
         </tr>     
         </table>
-            status
+            status<br>
             <form action="status.php" method="post">
             <input type="hidden" name="reservation_id" value="<?=$row['reservation_id']?>">
             <select name="status">
