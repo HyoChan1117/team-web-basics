@@ -49,8 +49,8 @@
         <th>designer</th>     
         <tr>
             <td><?=$rv_row['date']?></td>
-            <td><?=$rv_row['start_at']?></td>
-            <td><?=$rv_row['end_at']?></td>
+            <td><?= substr( $rv_row['start_at'], 0,5)?></td>
+            <td><?= substr($rv_row['end_at'], 0,5)?></td>
             <td><?=$rv_row['service_names']?></td>
             <td><?=$rv_row['requirement']?></td>
             <td><?=$rv_row['designer_name']?></td>    

@@ -61,8 +61,8 @@
         <td><?= $row['client_name'] ?></td>
         <td><?= $row['service_names'] ?></td>
         <td><?= $row['date'] ?></td>
-        <td><?= $row['start_at'] ?></td>
-        <td><?= $row['end_at'] ?></td>
+        <td><?= substr($row['start_at'], 0,5) ?></td>
+        <td><?= substr($row['end_at'], 0,5) ?></td>
         <td><?= $row['requirement'] ?></td>
         <td><?= $row['status'] ?></td>
         <td><?= $row['cancelled_at'] ?></td>
