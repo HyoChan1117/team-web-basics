@@ -2,6 +2,7 @@
     
     $session_account = $_SESSION['account'];
     $session_name = $_SESSION['user_name'];
+    $session_role = $_SESSION['role'];
 
     $msg = "안녕하세요! 환영합니다!";
     if ($_SESSION['role'] == 'designer') {
