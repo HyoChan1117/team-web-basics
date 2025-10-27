@@ -1,4 +1,5 @@
 <?php
+session_start();
 
     require_once("./db_conn.php");
 
@@ -40,6 +41,11 @@
         </tr>
     <?php endwhile; ?>
     </table>
+    <br>
+    <?php if($_SESSION['role'] == 'designer'):?>
+        <a href="staff_modify.php"><button>modify</button></a>
+    <?php endif; ?> 
+    <br>   
     <a href="mypage.php">--mypage--</a>
 </body>
 </html>
