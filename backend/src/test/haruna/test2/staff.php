@@ -30,8 +30,7 @@ session_start();
         <th>good_at</th>
         <th>personality </th>
         <th>message</th>
-    <?php while($row = $result->fetch_assoc()): ?>
-        
+    <?php while($row = $result->fetch_assoc()): ?>      
         <tr>
         <td><?= $row['designer_name'] ?></td>
         <td><?= $row['experience'] ?>year</td>
