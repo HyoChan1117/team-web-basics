@@ -8,7 +8,7 @@ $database = 'test';
 
 $db_conn = new mysqli($hostname, $username, $password, $database);
 
-$designer_id = 3;
+$designer_id = 2;
 
 // Designer 테이블을 읽어오는데 User에 있는 user_name 가져오기
 // sql문 작성
