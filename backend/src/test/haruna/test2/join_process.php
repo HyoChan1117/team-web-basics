@@ -2,6 +2,7 @@
     # 입력 정보를 POST로 받기
     $account = isset($_POST['account']) ? trim($_POST['account']) :'';
     $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+    $password2 = isset($_POST['password2']) ? trim($_POST['password2']) : '';
     $user_name = isset($_POST['user_name']) ? trim($_POST['user_name']) : '';
     $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
     $role = isset($_POST['role']) ? $_POST['role'] : '';
@@ -10,10 +11,18 @@
 
     # 유호성 확인
     # 잘못된 접근은 오류 표시하고 join.php로 돌아 가기
-    if ($account == '' || $password == '' || $user_name == '' || 
+    if ($account == '' || $password == '' || $password2 == '' || $user_name == '' || 
             $gender == '' || $role == '' || $birth == '') {
         header("Refresh: 2; URL='join.php'");
         echo '잘못한 접근입니다';
+        exit;
+    }
+
+    # password 와 password2가 맞는지 확인
+    # 안 맞으면 오류 표시하고 join.php로 돌아가기
+    if($password != $password2){
+        header("Refresh: 2; URL='join.php'");
+        echo "비밀번호가 일치하지 않습니다.";
         exit;
     }
 

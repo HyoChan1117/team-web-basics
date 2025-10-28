@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS Users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     account VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    user_name VARCHAR(255) NOT NULL,
     gender VARCHAR(100) NOT NULL,
     role ENUM('client', 'designer', 'manager') NOT NULL DEFAULT 'client',
     phone VARCHAR(30), 
@@ -21,13 +21,14 @@ CREATE TABLE IF NOT EXISTS Service (
     service_id INT AUTO_INCREMENT,
     service_name VARCHAR(255) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
+    duration_min INT NOT NULL DEFAULT 60, 
     PRIMARY KEY (service_id)
 );
 
-INSERT INTO Service (service_name, price) VALUES
-        ('CUT',40000),
-        ('PERM', 80000),
-        ('COLOR', 60000)
+INSERT INTO Service (service_name, price, duration_min) VALUES
+        ('CUT',40000, 60),
+        ('PERM', 80000, 100),
+        ('COLOR', 60000, 80)
 ;
 
 -- 예약 내용
@@ -36,9 +37,10 @@ CREATE TABLE IF NOT EXISTS Reservation (
     client_id INT NOT NULL,
     designer_id INT NOT NULL,
     requirement TEXT,
+    service VARCHAR(100) NOT NULL,
     date DATE NOT NULL,
     start_at TIME NOT NULL,
-    end_at TIME NOT NULL,
+    end_at TIME ,
     status ENUM('pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'no_show') NOT NULL DEFAULT 'pending',
     cancelled_at DATETIME,
     cancel_reason TEXT,
@@ -65,3 +67,52 @@ CREATE TABLE IF NOT EXISTS ReservationService (
     FOREIGN KEY (service_id) REFERENCES Service(service_id)
         ON UPDATE CASCADE ON DELETE RESTRICT    
 );
+
+CREATE TABLE IF NOT EXISTS Designer (
+    designer_id INT AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    experience INT NOT NULL,
+    good_at VARCHAR(255) NOT NULL,
+    personality VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (designer_id),
+    CONSTRAINT uq_designer_user UNIQUE (user_id),
+    CONSTRAINT fk_designer_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+);
+
+INSERT INTO Designer 
+    (user_id, experience, good_at, personality, message, created_at, )
+    VALUES (3, '3', '레이어드컷', '활발하다', '예쁜 공간에서 이미지와 1: 1 맞춤 상담을 통해 진심을 담아 디자인을 선물해드리겠습니다:)'),
+    (5, '10', '내추럴 스타일', '조용하다', '최손을 다해서 고객님에 잘 올리는 스타일을 제공합니다.');
+
+CREATE TABLE IF NOT EXISTS News (
+    news_id INT AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    file VARCHAR(255),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (news_id)
+);
+
+INSERT INTO News (title, content) 
+        VALUES ('haechan', 'hi'),
+    ('mark','hello'),
+    ('jisung', 'hi'),
+    ('haechan', 'hello'),
+    ('mark', 'hi'),
+    ('jisung', 'hello'),
+    ('haechan', 'hi'),
+    ('mark','hello'),
+    ('jisung', 'hi'),
+    ('haechan',  'hello'),
+    ('mark', 'hi'),
+    ('jisung', 'hello'),
+    ('haechan', 'hi'),
+    ('mark','hello'),
+    ('jisung', 'hi'),
+    ('haechan', 'hello'),
+    ('mark', 'hi'),
+    ('jisung', 'hello');
