@@ -26,13 +26,14 @@
         $total_row = $total_result->fetch_assoc();
         $total = $total_row["total"];
 
-        # total page 가져오기
-        $total_page = ($total / $limit);
+        # total page 
+        $total_page = ceil($total / $limit);
 
         # 블록 계산
         $blockpage = 5; # 한 블록에 몇개 페이지를 표시하는지 
         $curryblock = ceil($page / $blockpage); # 현재 블록
-        $start_block = ($curryblock - 1) * $blockpage + 1; # 한 블록의 start 숫자
+        $start_page = ($curryblock - 1) * $blockpage + 1; # 한 블록의 start 숫자
+        $end_page = (min($total_page,$blockpage * $curryblock)); # 한 블록의 마지막 숫자
 
         # News 테이블에 데이터를 가져오기
         $sql = "SELECT * 
@@ -72,15 +73,44 @@
     <hr>
 
     <?php while($row = $result->fetch_assoc()): ?>
+        <?= $row['news_id'] ?>
         <a href="news_viwe.php?news_id=<?= $row['news_id']?>"><?= $row['title'] ?></a>
         <br>
         <?= $row['created_at'] ?>
         <hr>
     <?php endwhile; ?>
 
-    <!-- -->
+    <?php 
+        $fromblock = $start_page - 1;
+        $nextblock = $end_page + 1;
+    ?>
+
+    <?php if($curryblock != 1): ?>
+        <!-- '<<' 첫 번째 블록으로 감 -->
+        <a href="news.php?page=1"><<</a>
+        <!-- '<' 전 블록으로 감 -->
+        <a href="news.php?page=<?=$fromblock?>"><</a>
+    <?php endif; ?>
+
+    <!-- page 수 표시 -->
+        <?php for($i = $start_page; $i <= $end_page; $i++): ?>
+            <?php if ($i == $page): ?>
+                <strong><a href="news.php?page=<?=$i?>"><?=$i?></a></strong>
+            <?php else: ?>
+                <a href="news.php?page=<?=$i?>"><?=$i?></a>
+            <?php endif; ?>
+        <?php endfor; ?>
+
+    <!-- '>' 다음 블록으로 감 -->
+    <?php if($end_page != $total_page): ?>
+        <a href="news.php?page=<?=$nextblock?>">></a>
+        <a href="news.php?page=<?=$total_page?>">>></a>
+    <?php endif; ?>
+
+
 
     <!-- manerger만 볼 수 있도록 권한  -->
+    <br>
     <?php if($_SESSION['role'] == 'manager'): ?>
         <a href="made_news.php"><button>WRITE</button></a>
     <?php endif; ?>

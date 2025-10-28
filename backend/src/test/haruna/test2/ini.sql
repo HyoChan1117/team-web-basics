@@ -96,3 +96,23 @@ CREATE TABLE IF NOT EXISTS News (
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (news_id)
 );
+
+INSERT INTO News (title, content) 
+        VALUES ('haechan', 'hi'),
+    ('mark','hello'),
+    ('jisung', 'hi'),
+    ('haechan', 'hello'),
+    ('mark', 'hi'),
+    ('jisung', 'hello'),
+    ('haechan', 'hi'),
+    ('mark','hello'),
+    ('jisung', 'hi'),
+    ('haechan',  'hello'),
+    ('mark', 'hi'),
+    ('jisung', 'hello'),
+    ('haechan', 'hi'),
+    ('mark','hello'),
+    ('jisung', 'hi'),
+    ('haechan', 'hello'),
+    ('mark', 'hi'),
+    ('jisung', 'hello');

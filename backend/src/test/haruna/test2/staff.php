@@ -1,4 +1,5 @@
 <?php
+session_start();
 
     require_once("./db_conn.php");
 
@@ -29,8 +30,7 @@
         <th>good_at</th>
         <th>personality </th>
         <th>message</th>
-    <?php while($row = $result->fetch_assoc()): ?>
-        
+    <?php while($row = $result->fetch_assoc()): ?>      
         <tr>
         <td><?= $row['designer_name'] ?></td>
         <td><?= $row['experience'] ?>year</td>
@@ -40,6 +40,11 @@
         </tr>
     <?php endwhile; ?>
     </table>
+    <br>
+    <?php if($_SESSION['role'] == 'designer'):?>
+        <a href="staff_modify.php"><button>modify</button></a>
+    <?php endif; ?> 
+    <br>   
     <a href="mypage.php">--mypage--</a>
 </body>
 </html>
