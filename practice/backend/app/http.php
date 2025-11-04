@@ -1,19 +1,19 @@
 <?php
 
-// 다른 출처에서 오는 요청을 어떤 방식으로 허용할지 설정하는 함수 정의
-function apply_cors(): void
-{
-    // 어떤 출처에서도 요청 허용
-    header('Access-Control-Allow-Origin: *');
+// // 다른 출처에서 오는 요청을 어떤 방식으로 허용할지 설정하는 함수 정의
+// function apply_cors(): void
+// {
+//     // 어떤 출처에서도 요청 허용
+//     header('Access-Control-Allow-Origin: *');
 
-    // 클라이언트가 사용할 수 있는 HTTP Method 목록 명시
-    header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
+//     // 클라이언트가 사용할 수 있는 HTTP Method 목록 명시
+//     header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
 
-    // 클라이언트가 요청 시 사용할 수 있는 헤더 허용
-    // Content-Type: 요청이나 응답의 "본문(body)"이 어떤 형식인지 알려주는 헤더
-    // Authorization: 사용자 인증 정보를 전달하는 헤더
-    header('Access-Control-Allow-Headers: Content-Type, Authorization');
-}
+//     // 클라이언트가 요청 시 사용할 수 있는 헤더 허용
+//     // Content-Type: 요청이나 응답의 "본문(body)"이 어떤 형식인지 알려주는 헤더
+//     // Authorization: 사용자 인증 정보를 전달하는 헤더
+//     header('Access-Control-Allow-Headers: Content-Type, Authorization');
+// }
 
 // RESTful API 응답을 JSON 형식으로 출력하는 함수
 // 응답 데이터를 JSON으로 변환해서, 클라이언트가 보기 좋게 전달하는 역할

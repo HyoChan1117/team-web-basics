@@ -1,68 +1,20 @@
-<!-- src/App.vue -->
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
-
 <template>
   <div>
-    <!-- 헤더 -->
-    <header style="padding: 1rem; border-bottom: 1px solid #ccc;">
-      <nav
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          max-width: 900px;
-          margin: 0 auto;
-        "
-      >
-        <RouterLink
-          to="/"
-          style="font-weight: bold; text-decoration: none; color: black;"
-        >
-          Student Admin
-        </RouterLink>
+    <!-- 전체 앱의 제목 -->
+    <h1>Students</h1>
 
-        <div style="display: flex; gap: 1rem;">
-          <RouterLink
-            to="/students"
-            style="text-decoration: none; color: gray;"
-            active-class="active"
-          >
-            목록
-          </RouterLink>
-          <RouterLink
-            to="/students/create"
-            style="text-decoration: none; color: gray;"
-            active-class="active"
-          >
-            등록
-          </RouterLink>
-        </div>
-      </nav>
-    </header>
+    <!-- 라우터 링크: 클릭 시 페이지 전환 -->
+    <!-- 목록 페이지로 이동 -->
+    <router-link to="/">
+      <button>목록</button>
+    </router-link>
 
-    <!-- 메인 -->
-    <main style="max-width: 900px; margin: 2rem auto; padding: 0 1rem;">
-      <RouterView v-slot="{ Component }">
-        <component :is="Component" />
-      </RouterView>
-    </main>
+    <!-- 등록 페이지로 이동 -->
+    <router-link to="/students/create">
+      <button>등록</button>
+    </router-link>
 
-    <!-- 푸터 -->
-    <footer
-      style="border-top: 1px solid #ccc; text-align: center; padding: 1rem; color: #666;"
-    >
-      © {{ new Date().getFullYear() }} Student Admin
-    </footer>
+    <!-- 현재 활성화된 라우트에 따라 해당하는 페이지 컴포넌트를 표시 -->
+    <router-view />
   </div>
 </template>
-
-<style>
-/* 활성 링크 표시 */
-.router-link-active {
-  color: black;
-  font-weight: bold;
-  text-decoration: underline;
-}
-</style>

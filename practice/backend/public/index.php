@@ -8,7 +8,7 @@ session_start();
 require_once __DIR__ . '/../app/http.php';
 
 // CORS 헤더 먼저 적용
-apply_cors();
+// apply_cors();
 
 // 프리플라이트(OPTIONS)는 여기서 종료 → 라우터로 보내지 않음
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
