@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import StudentsList from '@/views/StudentsList.vue'
-import StudentCreate from '@/views/StudentCreate.vue'
-import StudentDetail from '@/views/StudentDetail.vue'
-import StudentEdit from '@/views/StudentEdit.vue'
-import StudentDelete from '@/views/StudentDelete.vue'
+import StudentsList from '@/views/Student/StudentsList.vue'
+import StudentCreate from '@/views/Student/StudentCreate.vue'
+import StudentDetail from '@/views/Student/StudentDetail.vue'
+import StudentEdit from '@/views/Student/StudentEdit.vue'
+import StudentDelete from '@/views/Student/StudentDelete.vue'
 
 export default createRouter({
   history: createWebHistory(),
