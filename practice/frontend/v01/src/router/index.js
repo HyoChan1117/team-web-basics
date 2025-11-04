@@ -1,16 +1,18 @@
-// src/router/index.js
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router'
 
-const routes = [
-  { path: "/students", component: () => import("../components/StudentTable.vue") },
-  { path: "/students/create", component: () => import("../pages/StudentCreatePage.vue") },
-  { path: "/students/:std_id", component: () => import("../pages/StudentDetailPage.vue") },
-  { path: "/students/:std_id/edit", component: () => import("../pages/StudentEditPage.vue") },
-];
+import StudentsList from '@/views/StudentsList.vue'
+import StudentCreate from '@/views/StudentCreate.vue'
+import StudentDetail from '@/views/StudentDetail.vue'
+import StudentEdit from '@/views/StudentEdit.vue'
+import StudentDelete from '@/views/StudentDelete.vue'
 
-const router = createRouter({
+export default createRouter({
   history: createWebHistory(),
-  routes,
-});
-
-export default router;
+  routes: [
+    { path: '/', component: StudentsList },
+    { path: '/students/create', component: StudentCreate },
+    { path: '/students/:std_id', component: StudentDetail, props: true },
+    { path: '/students/:std_id/edit', component: StudentEdit, props: true },
+    { path: '/students/:std_id/delete', component: StudentDelete, props: true },
+  ],
+})
