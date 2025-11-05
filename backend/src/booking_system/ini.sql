@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS Users (
 );
 
 CREATE TABLE IF NOT EXISTS Salon (
-    salon_id INT AUTO_INCREMENT,
     image JSON NOT NULL COMMENT 'URL 배열 (캐러셀)',
     introduction TEXT NOT NULL,
     information JSON NOT NULL COMMENT 'Address, OpeningHour, Holiday, Phone',
@@ -32,13 +31,14 @@ CREATE TABLE IF NOT EXISTS Service (
     service_id INT AUTO_INCREMENT,
     service_name VARCHAR(255) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
+    duration_min INT NOT NULL DEFAULT 60,
     PRIMARY KEY (service_id)
 );
 
-INSERT INTO Service (service_name, price) VALUES
-    ('CUT', 10000),
-    ('PERM', 30000),
-    ('DYEING', 50000)
+INSERT INTO Service (service_name, price, duration_min) VALUES
+    ('CUT', 10000, 60),
+    ('PERM', 60000, 80),
+    ('COROL', 50000, 60)
 ;
 
 CREATE TABLE IF NOT EXISTS HairStyle (
