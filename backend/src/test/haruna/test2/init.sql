@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS Designer (
 );
 
 INSERT INTO Designer 
-    (user_id, experience, good_at, personality, message, created_at, )
+    (user_id, experience, good_at, personality, message, created_at)
     VALUES (3, '3', '레이어드컷', '활발하다', '예쁜 공간에서 이미지와 1: 1 맞춤 상담을 통해 진심을 담아 디자인을 선물해드리겠습니다:)'),
     (5, '10', '내추럴 스타일', '조용하다', '최손을 다해서 고객님에 잘 올리는 스타일을 제공합니다.');
 
