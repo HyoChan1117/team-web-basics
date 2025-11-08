@@ -31,7 +31,7 @@ async function handleSubmit(payload) {
       :showStdId="false"
       :requirePassword="false"
       @submit="handleSubmit"
-      @cancel="router.back()"
+      @cancel="() => router.back()"
     />
   </div>
 </template>

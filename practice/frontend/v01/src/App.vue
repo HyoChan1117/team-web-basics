@@ -5,12 +5,12 @@
 
     <!-- 라우터 링크: 클릭 시 페이지 전환 -->
     <!-- 목록 페이지로 이동 -->
-    <router-link to="/">
+    <router-link :to="{ name: 'StudentsList' }">
       <button>목록</button>
     </router-link>
 
     <!-- 등록 페이지로 이동 -->
-    <router-link to="/students/create">
+    <router-link :to="{ name: 'StudentCreate' }">
       <button>등록</button>
     </router-link>
 

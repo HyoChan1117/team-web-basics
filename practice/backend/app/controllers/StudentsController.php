@@ -25,7 +25,10 @@ class StudentsController
     {
         try {
             $db = get_db();
-            $res = $db->query("SELECT std_id, name, birth, gender, email, admission_year, current_year, status FROM student WHERE std_id =".$std_id);
+            $stmt = $db->prepare("SELECT std_id, name, birth, gender, email, admission_year, current_year, status FROM student WHERE std_id = ?");
+            $stmt->bind_param('i', $std_id);
+            $stmt->execute();
+            $res = $stmt->get_result();
             $row = $res->fetch_assoc();
             if (!$row) { json_response(['error'=>'없음'], 404); return; }
             json_response($row);
