@@ -16,3 +16,6 @@ docker/mysql/init.sql~
 # 백업 파일
 *~
 *.bak
+
+# composer-lock.json
+composer.lock

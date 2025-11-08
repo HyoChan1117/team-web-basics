@@ -2,7 +2,7 @@
 import { onMounted, reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStudentsStore } from '@/stores/students'
-import StudentForm from '@/components/StudentForm.vue'
+import StudentForm from '@/components/Student/StudentForm.vue'
 
 const s = useStudentsStore()
 const route = useRoute()
@@ -31,7 +31,7 @@ async function handleSubmit(payload) {
       :showStdId="false"
       :requirePassword="false"
       @submit="handleSubmit"
-      @cancel="router.back()"
+      @cancel="() => router.back()"
     />
   </div>
 </template>

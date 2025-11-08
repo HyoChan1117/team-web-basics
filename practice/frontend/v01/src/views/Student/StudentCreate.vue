@@ -1,14 +1,14 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { useStudentsStore } from '@/stores/students'
-import StudentForm from '@/components/StudentForm.vue'
+import StudentForm from '@/components/Student/StudentForm.vue'
 
 const s = useStudentsStore()
 const router = useRouter()
 
 async function handleSubmit(payload) {
   await s.create(payload)
-  router.push('/')   // 등록 후 목록으로
+  router.push('/students')   // 등록 후 목록으로
 }
 </script>
 
@@ -20,7 +20,7 @@ async function handleSubmit(payload) {
       :showStdId="true"
       :requirePassword="true"
       @submit="handleSubmit"
-      @cancel="router.back()"
+      @cancel="() => router.back()"
     />
   </div>
 </template>

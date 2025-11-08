@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStudentsStore } from '@/stores/students'
-import StudentTable from '@/components/StudentTable.vue'
+import StudentTable from '@/components/Student/StudentTable.vue'
 
 const s = useStudentsStore()
 const router = useRouter()

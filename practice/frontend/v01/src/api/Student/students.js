@@ -1,4 +1,4 @@
-import { request } from './client'
+import { request } from '../client'
 
 export const StudentsApi = {
   list(page = 1, limit = 2) {

@@ -1,46 +1,30 @@
 // src/api/client.js
 import axios from 'axios'
 
-// Vite 프록시를 쓰는 경우 BASE_URL은 '' (빈 문자열)
-const BASE_URL = ''
+// Vite dev 서버 프록시 사용 → 프론트에서는 항상 '/api'만 호출
+const BASE_URL = '/api'
 
-// Axios 인스턴스 생성
-const api = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  // fetch의 no-store 비슷하게, 캐시 방지
-  cache: false,
+  headers: { 'Content-Type': 'application/json' },
+  timeout: 10000,
 })
 
-// 요청 헬퍼 함수
-export async function request(method, path, body) {
-  try {
-    const response = await api.request({
-      url: path,
-      method,
-      data: body,
-    })
-    return response.data
-  } catch (error) {
-    // 서버 응답이 있는 경우
-    if (error.response) {
-      console.error(
-        '[API ERROR]',
-        method,
-        path,
-        error.response.status,
-        error.response.data
-      )
-      const err = new Error('API Error')
-      err.status = error.response.status
-      err.data = error.response.data
-      throw err
-    }
+// // 응답 인터셉터: 실패 시 에러 객체에 status/body를 담아서 throw
+// api.interceptors.response.use(
+//   (res) => res,
+//   (error) => {
+//     const r = error?.response
+//     const err = new Error(`[API] ${r?.config?.method?.toUpperCase()} ${r?.config?.url} ${r?.status}`)
+//     err.status = r?.status
+//     err.body = r?.data ?? r?.statusText ?? null  // ← 서버의 유효성 오류 JSON 그대로
+//     console.error('[API ERROR]', err.message, err.body)
+//     throw err
+//   }
+// )
 
-    // 네트워크 오류 등
-    console.error('[NETWORK ERROR]', method, path, error.message)
-    throw error
-  }
+// 공통 request 헬퍼 (성공 시 data만 반환)
+export async function request(method, url, data) {
+  const res = await api.request({ method, url, data })
+  return res.data
 }
