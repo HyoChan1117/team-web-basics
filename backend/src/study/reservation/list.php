@@ -34,7 +34,7 @@ echo "<h2>📋 내 예약 목록</h2>";
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<div style='margin-bottom:20px;'>";
     echo "🆔 예약번호: <b>" . $row['reservation_id'] . "</b><br>";
-    echo "💇 디자이너: " . $row['designer_id'] . "<br>";
+    echo "💇 디자이너: " . $row['designer_name'] . "<br>";
     echo "🛠 서비스: " . $row['service_name'] . "<br>";
     echo "🕒 시간: " . $row['start_at'] . " ~ " . $row['end_at'] . "<br>";
     echo "📌 상태: <b>" . strtoupper($row['status']) . "</b><br>";
