@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS Salon(
     map VARCHAR(255) NOT NULL,
     traffic JSON NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT NULL ON CURRENT_TIMESTAMP
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS Service(
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS HairStyle(
     image VARCHAR(255) NOT NULL,
     description TEXT,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT NULL ON CURRENT_TIMESTAMP
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS Designer(
@@ -49,9 +49,9 @@ CREATE TABLE IF NOT EXISTS Designer(
     personality VARCHAR(255) NOT NULL,
     message TEXT NOT NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT NULL ON CURRENT_TIMESTAMP
-    CONSTRAIN uq_designer_user UNIQUE (user_id),
-    CONSTRAIN fk_designer_user FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT uq_designer_user UNIQUE (user_id),
+    CONSTRAINT fk_designer_user FOREIGN KEY (user_id) REFERENCES Users(user_id)
         ON DELETE CASCADE
 );
 
@@ -69,11 +69,11 @@ CREATE TABLE IF NOT EXISTS Reservation(
     cancelled_at DATETIME,
     cancel_reason TEXT,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT NULL ON CURRENT_TIMESTAMP,
-    CONSTRAIN fk_reservation_client
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_reservation_client
         FOREIGN KEY (client_id) REFERENCES Users(user_id)
         ON DELETE CASCADE,
-    CONSTRAIN fk_reservation_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
+    CONSTRAINT fk_reservation_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
 );
 
 CREATE TABLE IF NOT EXISTS News(
@@ -83,6 +83,13 @@ CREATE TABLE IF NOT EXISTS News(
     content TEXT NOT NULL,
     file JSON NOT NULL,
     created_at  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT NULL ON DEFAULT CURRENT_TIMESTAMP
+    updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS Timeoff(
+    to_id INT PRIMARY KEY AUTO_INCREMENT,
+    designer_id INT NOT NULL,
+    start_at DATE NOT NULL,
+    end_at DATE NOT NULL,
+    CONSTRAINT fk_timeoff_designer FOREIGN KEY (designer_id) REFERENCES Users(user_id)
+);
