@@ -125,9 +125,9 @@
     }
 
     if($endPage != $totalPage) {
-            echo "<a href='?page=$nextBlock&$search'>></a> ";
-            echo "<a href= '?page=$endPage&$search'>>></a> ";
-        }
+        echo "<a href='?page=$nextBlock&$search'>></a> ";
+        echo "<a href= '?page=$endPage&$search'>>></a> ";
+    }
 ?>
 </body>
 </html>
