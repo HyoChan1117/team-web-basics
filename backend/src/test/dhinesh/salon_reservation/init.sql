@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS Users(
     role ENUM ('client', 'designer', 'manager') NOT NULL DEFAULT 'client',
     gender VARCHAR(10) NOT NULL,
     phone VARCHAR (15) NOT NULL,
-    email VARCHAR(50) NOT NULL,
     birth DATE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
