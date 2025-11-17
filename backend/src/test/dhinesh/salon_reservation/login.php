@@ -17,7 +17,7 @@
         
         <hr>
 
-        <input type="text" name="account" placeholder="Username" style="display:block; margin-bottom:12px; padding:8px;">
+        <input type="text" name="account" placeholder="Enter your ID" style="display:block; margin-bottom:12px; padding:8px;">
         <input type="password" name="password" placeholder="Password" style="display:block; padding:8px;"><br>
 
         <button>login</button>
