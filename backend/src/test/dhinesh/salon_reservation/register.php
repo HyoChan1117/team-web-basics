@@ -16,10 +16,12 @@
         <input type="radio" id="client" name="role" value="client">
         <label for="client">client</label>
         <input type="radio" id="designer" name="role" value="designer">
-        <label for="designer">designer</label><br><br>
+        <label for="designer">designer</label>
+        <input type="radio" id="manager" name="role" value="manager">
+        <label for="manager">manager</label><br><br>
 
         <label for="name">Name :</label>
-        <input type="text" name="user_name" placeholder="Enter your name" require><br><br>
+        <input type="text" name="user_name" placeholder="Enter your name"><br><br>
 
 
         <label for="gender">Gender :</label>
@@ -29,19 +31,19 @@
         <label for="woman">female</label><br><br>
 
         <label for="dob">DOB :</label>
-        <input type="date" name="birth" placeholder="DD-MM-YYYY" require><br><br>
+        <input type="date" name="birth" placeholder="DD-MM-YYYY" required><br><br>
 
         <label for="account">Account :</label>
-        <input type="text" name="account" placeholder="Enter you Account" require><br><br>
+        <input type="text" name="account" placeholder="Enter you Account" required><br><br>
         
         <label for="password">Password :</label>
-        <input type="password" name="password" placeholder="Enter your password" require>
+        <input type="password" name="password" placeholder="Enter your password" required>
         
-        <input type="password" name="pass_valid" id="pass_valid" placeholder="Re-enter password" require><br><br>
+        <input type="password" name="pass_valid" id="pass_valid" placeholder="Re-enter password" required><br><br>
         
 
         <label for="mobile">Mobile Number :</label>
-        <input type="tel" name="phone" id="mobile" placeholder="Enter your Mobile Number" require><br><br>
+        <input type="tel" name="phone" id="mobile" placeholder="Enter your Mobile Number" required><br><br>
 
         <button>sign Up</button>
         <input type="reset" value="Reset">

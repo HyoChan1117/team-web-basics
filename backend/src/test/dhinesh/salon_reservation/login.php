@@ -14,11 +14,13 @@
         <label for="client">client</label>
         <input type="radio" id="designer" name="role" value="designer">
         <label for="designer">designer</label>
+        <input type="radio" id="manager" name="role" value="manager">
+        <label for="manager">manager</label>
         
         <hr>
 
-        <input type="text" name="account" placeholder="Enter your ID" style="display:block; margin-bottom:12px; padding:8px;">
-        <input type="password" name="password" placeholder="Password" style="display:block; padding:8px;"><br>
+        <input type="text" name="account" placeholder="Enter your ID" style="display:block; margin-bottom:12px; padding:8px;" required>
+        <input type="password" name="password" placeholder="Password" style="display:block; padding:8px;" required><br>
 
         <button>login</button>
 
