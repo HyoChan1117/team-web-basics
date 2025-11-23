@@ -9,10 +9,8 @@
     <h2>sign Up</h2>
 
     <form action="register_process.php" method= "post">
-        <fieldset>
-        <legend>Enter User Information</legend>
-
-        <label for="user">User :</label>
+    <fieldset>
+        <label for="user">User Type :</label>
         <input type="radio" id="client" name="role" value="client">
         <label for="client">client</label>
         <input type="radio" id="designer" name="role" value="designer">

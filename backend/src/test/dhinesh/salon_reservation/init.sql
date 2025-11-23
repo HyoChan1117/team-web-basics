@@ -31,6 +31,12 @@ CREATE TABLE IF NOT EXISTS Service(
     price DECIMAL(10, 2)
 );
 
+INSERT INTO Service (service_name, price) VALUES
+    ('CUT', 10000),
+    ('PERM', 30000),
+    ('DYEING', 50000)
+;
+
 CREATE TABLE IF NOT EXISTS HairStyle(
     hair_id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
