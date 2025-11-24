@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS Reservation(
     requirement TEXT,
     date DATE NOT NULL,
     start_at TIME NOT NULL,
-    end_at TIME NOT NULL,
+    end_at TIME,
     status ENUM('pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'no_show') 
             NOT NULL DEFAULT 'pending',
     cancelled_at DATETIME,
