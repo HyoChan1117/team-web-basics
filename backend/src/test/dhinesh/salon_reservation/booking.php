@@ -4,7 +4,7 @@
             "12.00", "12.30", "13.00", "13.30", "14.00", "14.30", 
             "15.00", "15.30","16.00", "16.30", "17.00", "17.30", "18.00"];
 
-    $date = date("D-M-Y");
+    $date = date("Y-M-D");
 
     // getting the login info and user permission
     require_once "./welcome.php";
@@ -88,7 +88,7 @@
                     echo "<td>$count</td>";
                     echo "<td>$row[designer_name]</td>";
                     echo "<td>$row[Service]</td>";
-                    echo "<td>$row[requirment]</td>";
+                    echo "<td>$row[requirement]</td>";
                     echo "<td>$row[date]</td>";
                     echo "<td>$row[start_at]</td>";
                     echo "<td>$row[end_at]</td>";
