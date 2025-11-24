@@ -5,12 +5,11 @@ USE reservation;
 CREATE TABLE IF NOT EXISTS Users(
     user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     account VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     user_name VARCHAR(50) NOT NULL,
     role ENUM ('client', 'designer', 'manager') NOT NULL DEFAULT 'client',
     gender VARCHAR(10) NOT NULL,
     phone VARCHAR (15) NOT NULL,
-    email VARCHAR(50) NOT NULL,
     birth DATE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
@@ -31,6 +30,12 @@ CREATE TABLE IF NOT EXISTS Service(
     service_name VARCHAR(255) NOT NULL,
     price DECIMAL(10, 2)
 );
+
+INSERT INTO Service (service_name, price) VALUES
+    ('CUT', 10000),
+    ('PERM', 30000),
+    ('DYEING', 50000)
+;
 
 CREATE TABLE IF NOT EXISTS HairStyle(
     hair_id INT PRIMARY KEY AUTO_INCREMENT,
