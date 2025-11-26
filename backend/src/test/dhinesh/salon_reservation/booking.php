@@ -8,6 +8,7 @@
 
     // getting the login info and user permission
     require_once "./welcome.php";
+    require_once "./menu.php";
     require_once "./helper.php";
 
 
@@ -53,6 +54,7 @@
     }
     // db close
     $db_conn->close();
+    require_once "./main.php";
 ?>
 
 <!DOCTYPE html>
@@ -63,73 +65,7 @@
     <title>Booking</title>
 </head>
 <body>
-    <h2>Booking</h2>
 <form action="booking_process.php" method= "post">
-    <table border= 2>
-        <tr>
-            <th>ID</th>
-            <th>designer_name</th>
-            <th>Service</th>
-            <th>Requirement</th>
-            <th>Date</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Status</th>
-        </tr>
-
-        <?php
-            $count = 1;
-
-            if($result_resv->num_rows <= 0){
-                echo "<tr><td colspan='8'>No Reservation</td></tr>";
-            }else{
-                while($row = $result_resv->fetch_assoc()){
-                    echo "<tr>";
-                    echo "<td>$count</td>";
-                    echo "<td>$row[designer_name]</td>";
-                    echo "<td>$row[Service]</td>";
-                    echo "<td>$row[requirement]</td>";
-                    echo "<td>$row[date]</td>";
-                    echo "<td>$row[start_at]</td>";
-                    echo "<td>$row[end_at]</td>";
-                    echo "<td>$row[status]</td>";
-                    echo "</tr>";
-
-                    $count++;
-                }
-            }
-
-        ?>
-    </table><br>
-
-
-    <h3>Designer Unavailable (Every Sunday)</h3>
-    <table border= 1>
-        <tr>
-            <th>ID</th>
-            <th>designer_name</th>
-            <th>start_at</th>
-            <th>end_at</th>
-        </tr>
-        <?php
-        $count_off = 1;
-        
-        if($result_off->num_rows <= 0){
-            echo "<tr><td colspan='5'>No designer off-day found</td></tr>";
-        }else{
-            while($row = $result_off->fetch_assoc()){
-                echo "<tr>";
-                echo "<td>$count_off</td>";
-                echo "<td>$row[designer_name]</td>";
-                echo "<td>$row[start_at]</td>";
-                echo "<td>$row[end_at]</td>";
-                echo "</tr>";
-
-                $count_off++;
-            }
-        }
-        
-        ?>
     </table>
 
     <br>
@@ -167,6 +103,35 @@
         </fieldset>
     </form>
 </form>
-<?php endif; ?>
+
+<h3>Designer Unavailable (Every Sunday)</h3>
+    <table border= 1>
+        <tr>
+            <th>ID</th>
+            <th>designer_name</th>
+            <th>start_at</th>
+            <th>end_at</th>
+        </tr>
+
+    <?php
+        $count_off = 1;
+        
+        if($result_off->num_rows <= 0){
+            echo "<tr><td colspan='5'>No designer off-day found</td></tr>";
+        }else{
+            while($row = $result_off->fetch_assoc()){
+                echo "<tr>";
+                echo "<td>$count_off</td>";
+                echo "<td>$row[designer_name]</td>";
+                echo "<td>$row[start_at]</td>";
+                echo "<td>$row[end_at]</td>";
+                echo "</tr>";
+
+                $count_off++;
+            }
+        }
+        
+        ?>
 </body>
+<?php endif; ?>
 </html>

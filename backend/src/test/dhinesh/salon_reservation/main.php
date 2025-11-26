@@ -1,6 +1,5 @@
 <?php
     require_once "./welcome.php";
 
-    require_once "./main.html";
-
+    require_once "./menu.php";
 ?>
