@@ -123,7 +123,7 @@
 
     <table border= "2">
         <tr>
-            <th>ID</th>
+            
             <th>client</th>
             <th>Designer</th>
             <th>Service</th>
@@ -146,7 +146,6 @@
             $count++;
 
             echo "<tr>";
-            echo "<td>$count</td>";
             echo "<td>$row[client_name]</td>";
             echo "<td>$row[designer_name]</td>";
             echo "<td>$row[Service]</td>";
