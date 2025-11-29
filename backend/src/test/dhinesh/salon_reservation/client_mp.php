@@ -115,10 +115,6 @@
         <button name="view" value="current" <?= $view=="current" ?>>
         Current Reservation
         </button>
-
-        <button name="view" value="history" <? $view=="history"?>>
-        History Reservation
-        </button><br><br>
     </form>
 
     <?php if($view == "current"): ?>
@@ -176,7 +172,13 @@
             echo "<a href= 'client_mp.php?page=$i&view=current'>$i</a> ";
         }
     }
-?>
+?><br><br>
+
+<form method="get" action="client_mp.php">
+    <button name="view" value="history" <? $view=="history"?>>
+        History Reservation
+        </button>
+</form>
 
 <?php elseif ($view == "history"): ?>
 
