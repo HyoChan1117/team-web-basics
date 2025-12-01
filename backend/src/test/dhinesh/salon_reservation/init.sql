@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS HairStyle(
 CREATE TABLE IF NOT EXISTS Designer(
     designer_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    experiance INT NOT NULL,
+    experience INT NOT NULL,
     good_at VARCHAR(255) NOT NULL,
     personality VARCHAR(255) NOT NULL,
     message TEXT NOT NULL,
