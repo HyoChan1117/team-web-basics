@@ -20,7 +20,7 @@ try {
     $result = $db_conn->query($sql);
 
 } catch (Exception $e) {
-    echo "DB error: " . $e;
+    echo "DB error" . $e;
 }
 
 // close DB
@@ -50,11 +50,11 @@ $db_conn->close();
         // Show all designers
         while ($row = $result->fetch_assoc()) {
             echo "<tr>";
-            echo "<td>{$row['designer_name']}</td>";
-            echo "<td>{$row['experience']}</td>";
-            echo "<td>{$row['good_at']}</td>";
-            echo "<td>{$row['personality']}</td>";
-            echo "<td>{$row['message']}</td>";
+            echo "<td>$row[designer_name]</td>";
+            echo "<td>$row[experience]</td>";
+            echo "<td>$row[good_at]</td>";
+            echo "<td>$row[personality]</td>";
+            echo "<td>$row[message]</td>";
             echo "</tr>";
         }
         ?>
