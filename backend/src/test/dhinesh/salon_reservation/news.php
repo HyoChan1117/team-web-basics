@@ -14,7 +14,7 @@
     }
 
     // set the page limi
-    $limit = 5;
+    $limit = 3;
 
     // get the page query
     $page = isset($_GET['page'])? $_GET['page']: '1';
@@ -25,6 +25,9 @@
     // create a search query
     $search_type = isset($_GET['search_type'])? $_GET['search_type']: 'title';
     $search_query= isset($_GET['search_query'])? $_GET['search_query']: '';
+
+    // build search string for pagination
+    $search = "search_type=$search_type&search_query=$search_query";
 
     $where = '';
 
