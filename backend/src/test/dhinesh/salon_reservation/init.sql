@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS HairStyle(
 CREATE TABLE IF NOT EXISTS Designer(
     designer_id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
-    experiance INT NOT NULL,
+    experience INT NOT NULL,
     good_at VARCHAR(255) NOT NULL,
     personality VARCHAR(255) NOT NULL,
     message TEXT NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS Reservation(
     requirement TEXT,
     date DATE NOT NULL,
     start_at TIME NOT NULL,
-    end_at TIME NOT NULL,
+    end_at TIME,
     status ENUM('pending', 'confirmed', 'checked_in', 'completed', 'cancelled', 'no_show') 
             NOT NULL DEFAULT 'pending',
     cancelled_at DATETIME,
@@ -83,7 +83,6 @@ CREATE TABLE IF NOT EXISTS Reservation(
 
 CREATE TABLE IF NOT EXISTS News(
     news_id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
     title VARCHAR(100) NOT NULL,
     content TEXT NOT NULL,
     file JSON NOT NULL,

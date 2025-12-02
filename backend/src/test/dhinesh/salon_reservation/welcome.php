@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="account">
-        Welcome, <?="$session_name $session_role"."!" ?>
+        Welcome, <?="$session_name" ?>
         <a href="logout.php">Logout</a>
     </div>
 </body>

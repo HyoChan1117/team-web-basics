@@ -8,6 +8,9 @@
     $date = isset($_POST['date'])? $_POST['date']: '';
     $start_at = isset($_POST['start_at'])? $_POST['start_at']: '';
 
+    // fix the time format 
+    $start_at = str_replace(".", ":", $start_at) . ":00";
+
     // check the empty values
     if(empty($client) || empty($service) || empty($requirement) || empty($designer) || empty($date) || empty($start_at)){
         header("refresh: 2; URL= 'booking.php'");
@@ -26,7 +29,7 @@
         // sql statement
         $sql_off = "SELECT * FROM Timeoff 
                     WHERE '$date' BETWEEN start_at AND end_at 
-                    AND designer_id = 'designer_id'";
+                    AND designer_id = '$designer'";
 
         $sql_resv = "SELECT * FROM Reservation
                     WHERE designer_id = '$designer'
@@ -35,7 +38,7 @@
                     AND status != 'cancelled'";
 
         $sql_inst = "INSERT INTO Reservation (client_id, designer_id, Service, requirement, date, start_at, end_at, status) 
-                    VALUES ('$client', '$designer', '$service', '$requirement', '$date', '$start_at', '$start_at', 'pending')";
+                    VALUES ('$client', '$designer', '$service', '$requirement', '$date', '$start_at', '', 'pending')";
         
         
         // Execute query
@@ -48,19 +51,25 @@
         $resv_weekday = date('w', strtotime($date));
 
         // execute the result 
-        if($result_off->num_rows > 0)
+        if($result_off->num_rows < 0) {
             header("refresh: 2; URL= 'booking.php'");
             echo "Designer unavailable";
             exit;
+        }
 
-        if($holiday == $resv_weekday);
+        if($resv_weekday == 0) {
             header("refresh: 2; URL= 'booking.php'");
             echo "Every week sunday is Holiday";
             exit;
+        }    
 
         if(!$result_inst){
-            header("refresh: 2; ULR= 'booking.php'");
+            header("refresh: 2; URL= 'booking.php'");
             echo "Reservation Failed";
+            exit;
+        }else{
+            header("refresh: 2; URL= 'mypage.php'");
+            echo "Reservation Confirmed";
             exit;
         }
 
