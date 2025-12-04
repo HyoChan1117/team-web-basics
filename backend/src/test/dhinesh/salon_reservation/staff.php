@@ -60,7 +60,7 @@ $db_conn->close();
         ?>
     </table>
 
-    <?php if ($_SESSION['role'] == 'designer'): ?>
+    <?php if ($_SESSION['role'] == 'manager'): ?>
         <br>
         <a href="staff_modify.php"><button>Modify</button></a>
     <?php endif; ?>

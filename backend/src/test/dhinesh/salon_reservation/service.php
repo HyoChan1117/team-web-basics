@@ -46,5 +46,8 @@
         ?>
 
     </table>
+<?php if ($_SESSION['role'] == 'manager'): ?><br>
+    <a href="service_modify.php"><button>Modify</button></a>
+<?php endif; ?>
 </body>
 </html>

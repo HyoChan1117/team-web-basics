@@ -140,9 +140,8 @@
 
 
 ?>
-<?php if ($_SESSION['role'] == 'manager'): ?>
-        <br>
-        <a href="staff_modify.php"><button>Modify</button></a>
+<?php if ($_SESSION['role'] == 'manager'): ?><br>
+        <a href="news_modify.php"><button>Modify</button></a>
     <?php endif; ?>
 
 </body>
