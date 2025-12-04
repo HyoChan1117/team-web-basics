@@ -14,7 +14,7 @@ if(!user_permission($_SESSION['role'], 'designer')){
     exit;
 }
 
-// get the designer account (ALWAYS exists)
+// get the designer account
 $designer_account = $_SESSION['account'];
 
 // set the page limit
@@ -31,7 +31,7 @@ try {
     require "./db_config.php";
 
     // ---------------------------------------------------
-    // 1) LOAD DESIGNER PROFILE USING ACCOUNT (WORKS 100%)
+    // 1) LOAD DESIGNER PROFILE USING ACCOUNT
     // ---------------------------------------------------
     $sql_profile = "
         SELECT d.*, u.user_name
