@@ -7,11 +7,11 @@
 
     require_once "./menu.php";
 
-    // check the login and role
-    if(!user_permission($_SESSION['role'], 'client')){
-        echo "Access denied. Client only";
-        exit;
-    }
+    // // check the login and role
+    // if(!user_permission($_SESSION['role'], 'client')){
+    //     echo "Access denied. Client only";
+    //     exit;
+    // }
 
     // set the page limi
     $limit = 3;
@@ -96,7 +96,7 @@
 <?php
     // if the input is valid display error message
     // else show the news
-    if(!$result->num_rows <= 0){
+    if($result->num_rows <= 0){
         echo "No Post";
     }
     while($row = $result->fetch_assoc()){
@@ -140,6 +140,9 @@
 
 
 ?>
+<?php if ($_SESSION['role'] == 'manager'): ?><br>
+        <a href="news_modify.php"><button>Modify</button></a>
+    <?php endif; ?>
 
 </body>
 </html>
