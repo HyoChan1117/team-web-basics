@@ -224,9 +224,11 @@
 <?php 
     for ($i = 1; $i <= $total_history_page; $i++) {
         if($i == $page)
-            echo "<strong>$i</strong> ";
+            echo "<a href= 'client_mp.php?page=$i&view=history'><strong>$i</strong></a> ";
+        else
+            echo "<a href= 'client_mp.php?page=$i&view=history'>$i</a> ";
     }
-    echo "<a href= 'client_mp.php?page=$i&view=history'>$i</a> ";
+    
 ?>
 
 <?php endif; ?>
